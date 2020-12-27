@@ -1,22 +1,58 @@
+html {
+    min-height: 100%;
+}
+
 body {
     padding-top: 4.5rem;
     font-family: 'Roboto Mono', monospace;
-    background: url('images/bg_woods.png') top;
+    min-height: 100%;
 }
 
-.block{
+.bg_cult {
+    background: url('images/bg_cult.jpg') top no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg_forest {
+    background: url('images/bg_forest.webp') top no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg_town {
+    background: url('images/bg_town.jpg') top no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg_help {
+    background: url('images/bg_help.jpg') top no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.block {
     background: rgba(70, 70, 70, .8) !important;
 }
 
-.block h1{
+.block h1 {
     color: aliceblue;
 }
 
-.block p{
+.block p {
     color: aliceblue;
 }
 
-.block table{
+.block table {
     color: aliceblue;
 }
 

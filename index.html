@@ -13,7 +13,7 @@
 
     <title>Cult Clicker</title>
 </head>
-<body>
+<body class="bg_cult">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -25,8 +25,8 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Town</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About / Help</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">Town</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
                 </ul>
             </div>
         </div>
@@ -54,6 +54,22 @@
         <div class="d-grid gap-2">
             <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(-<span id="label-land-cost">X</span> Money) (+1 Fait)</small></button>
         </div>
+    </div>
+
+    <div class="block block-town bg-light p-4 m-2 rounded" style="display: none;">
+        <h1>Town</h1>
+        <table class="table table-sm">
+            <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
+        </table>
+        <div class="d-grid gap-2">
+            <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(-<span id="label-land-cost">X</span> Money) (+1 Fait)</small></button>
+        </div>
+    </div>
+
+    <div class="block block-help bg-light p-4 m-2 rounded" style="display: none;">
+        <h1>About / Help</h1>
+        <p>Cult Clicker by <a href="https://drcrow.github.io/resume/">Dr. CroW</a> - 2020</p>
+        <p>I love the incremental/idle/clicker text based kind of games so decided to build one for myself. I hope you enjoy playing it as much as I enjoyed creating it.</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

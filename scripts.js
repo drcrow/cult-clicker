@@ -129,7 +129,13 @@ function spendCost(stat){
 
 // Show/Hide content blocks (from the menu)
 function showBlock(block){
+
+    // Hide all block and show the selected one
     $('.collapse').collapse('hide');
     $('.block').hide();
     $('.block-'+block).show();
+
+    // Remove background and add the one of the selected block
+    $('body').removeClass('bg_cult bg_forest bg_town bg_help');
+    $('body').addClass('bg_'+block);
 }
