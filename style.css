@@ -44,7 +44,7 @@ body {
     background: rgba(70, 70, 70, .8) !important;
 }
 
-.block h1 {
+.block h1, h2 {
     color: aliceblue;
 }
 
