@@ -10,6 +10,10 @@ var gameStats = {
             "stat": "fait",
             "amount": 10,
             "modifier": 1.1
+        },
+        "product": {
+            "stat": "fait",
+            "amount": 1
         }
     },
     "money": {
@@ -18,6 +22,15 @@ var gameStats = {
         "cost": {
             "stat": "members",
             "amount": 1,
+            "modifier": 1.1
+        }
+    },
+    "land": {
+        "points": 0,
+        "increment": 0,
+        "cost": {
+            "stat": "money",
+            "amount": 100,
             "modifier": 1.1
         }
     },
@@ -33,6 +46,7 @@ function updateLabels(){
 
     $('#label-money-pts').text(gameStats.money.points);
     $('#label-money-inc').text(gameStats.money.increment);
+    $('#label-money-cost').text(gameStats.money.cost.amount);
 }
 
 var intervalID = window.setInterval(updateLabels, 1000);
@@ -76,4 +90,10 @@ function spendCost(stat){
 
     gameStats[costStat].points = gameStats[costStat].points - costAmount;
     gameStats[stat].cost.amount = newCostAmount;
+}
+
+function showBlock(block){
+    $('.collapse').collapse('hide');
+    $('.block').hide();
+    $('.block-'+block).show();
 }

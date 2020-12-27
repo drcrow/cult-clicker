@@ -4,10 +4,14 @@ body {
     background-image: url('images/bg_woods.png');
 }
 
-#block-start{
+.block{
     background: rgba(70, 70, 70, .8) !important;
 }
 
-#block-start p{
+.block h1{
+    color: aliceblue;
+}
+
+.block p{
     color: aliceblue;
 }

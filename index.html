@@ -17,39 +17,40 @@
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Cult Clicker</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Cult</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Forest</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Town</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About / Help</a>
-              </li>
-            </ul>
-          </div>
+            <a class="navbar-brand" href="#">Cult Clicker v0.1</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Town</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About / Help</a></li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
-<div id="block-start" class="bg-light p-4 m-2 rounded">
-    <p>Fait: <span id="label-fait-pts">X</span> (<span id="label-fait-inc">X</span>/sec)</p>
-    <p>Members: <span id="label-members-pts">X</span> (<span id="label-members-inc">X</span>/sec)</p>
-    <p>Money: <span id="label-money-pts">X</span> (<span id="label-money-inc">X</span>/sec)</p>
-    <div class="d-grid gap-2">
-        <button class="btn btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
-        <button class="btn btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
-        <button class="btn btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-1 Members) (+10 Money)</small></button>
+    <div class="block block-cult bg-light p-4 m-2 rounded">
+        <h1>Cult</h1>
+        <p>Fait: <span id="label-fait-pts">X</span> (<span id="label-fait-inc">X</span>/sec)</p>
+        <p>Members: <span id="label-members-pts">X</span> (<span id="label-members-inc">X</span>/sec)</p>
+        <p>Money: <span id="label-money-pts">X</span> (<span id="label-money-inc">X</span>/sec)</p>
+        <div class="d-grid gap-2">
+            <button class="btn btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
+            <button class="btn btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
+            <button class="btn btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> Members) (+10 Money)</small></button>
+        </div>
     </div>
-</div>
+
+    <div class="block block-forest bg-light p-4 m-2 rounded" style="display: none;">
+        <h1>Forest</h1>
+        <p>Land: <span id="label-fait-pts">X</span> (<span id="label-fait-inc">X</span>/sec)</p>
+        <div class="d-grid gap-2">
+            <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(+1 Fait)</small></button>
+        </div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts.js"></script>
