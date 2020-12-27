@@ -9,6 +9,14 @@ body {
     background-color: black;
 }
 
+#section-top {
+    font-size: .8rem;
+}
+
+#section-bottom {
+    font-size: .8rem;
+}
+
 .bg_cult {
     background: url('images/bg_cult.jpg') top no-repeat;
     -webkit-background-size: cover;

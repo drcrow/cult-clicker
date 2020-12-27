@@ -92,15 +92,15 @@ function updateGame(){
 var intervalID = window.setInterval(updateGame, 1000);
 
 // Update the Increment of a Stat when it is purchased (+) or used (-)
-function updateIncrement(stat, purchased){
+function updateIncrement(stat, qty, purchased){
     if(gameStats[stat].product != undefined){
         var productStat = gameStats[stat].product.stat;
         var productAmount = gameStats[stat].product.amount;
 
         if(purchased){ // purchased (+)
-            gameStats[productStat].increment = gameStats[productStat].increment + productAmount;
+            gameStats[productStat].increment = gameStats[productStat].increment + (qty * productAmount);
         }else{  // used (-)
-            gameStats[productStat].increment = gameStats[productStat].increment - productAmount;
+            gameStats[productStat].increment = gameStats[productStat].increment - (qty * productAmount);
         }
     }
 }
@@ -113,7 +113,7 @@ function pray(){
 function recruit(){
     if(checkCost('members')){
         spendCost('members');
-        updateIncrement('members', true);
+        updateIncrement('members', 1, true);
         gameStats.members.points = gameStats.members.points + 1;
         updateLabels();
     }
@@ -130,7 +130,7 @@ function collect(){
 function takeLand(){
     if(checkCost('land')){
         spendCost('land');
-        updateIncrement('land', true);
+        updateIncrement('land', 1, true);
         gameStats.land.points = gameStats.land.points + 1;
         updateLabels();
     }
@@ -154,7 +154,7 @@ function spendCost(stat){
     var costAmount = gameStats[stat].cost.amount;
     var newCostAmount = Math.round(gameStats[stat].cost.amount * gameStats[stat].cost.modifier);
 
-    updateIncrement(costStat, false);
+    updateIncrement(costStat, costAmount, false);
 
     gameStats[costStat].points = gameStats[costStat].points - costAmount;
     gameStats[stat].cost.amount = newCostAmount;
