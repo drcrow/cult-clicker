@@ -3,6 +3,10 @@ var gameStats = {
         "points": 0,    // Current points
         "increment": 0  // Automatic increment of points in each interval
     },
+    "magic": {
+        "points": 0,    // Current points
+        "increment": 0  // Automatic increment of points in each interval
+    },
     "members": {
         "points": 0,
         "increment": 0,
@@ -29,9 +33,13 @@ var gameStats = {
         "points": 0,
         "increment": 0,
         "cost": {
-            "stat": "money",
-            "amount": 100,
+            "stat": "members",
+            "amount": 10,
             "modifier": 1.1
+        },
+        "product": {
+            "stat": "magic",
+            "amount": 1
         }
     },
 };
@@ -63,7 +71,7 @@ function updateLabels(){
     });
 }
 
-// Apply the autoincrement of stats points
+// Apply the autoincrement for stats points
 function updatePoints(){
     Object.keys(gameStats).forEach(stat => {
         if(gameStats[stat].increment != 0){
@@ -115,6 +123,15 @@ function collect(){
     if(checkCost('money')){
         spendCost('money');
         gameStats.money.points = gameStats.money.points + 10;
+        updateLabels();
+    }
+}
+
+function takeLand(){
+    if(checkCost('land')){
+        spendCost('land');
+        updateIncrement('land', true);
+        gameStats.land.points = gameStats.land.points + 1;
         updateLabels();
     }
 }
