@@ -44,6 +44,76 @@ var gameStats = {
     },
 };
 
+var gameEvents = {
+    "game-start": {
+        "done": 0,
+        "conditions":[{
+            "stat": "fait",
+            "amount": 0
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Your God needs your faith to become stronger and stronger. Show him that you are worthy of existing."
+        }]
+    },
+    "is-praying": {
+        "done": 0,
+        "conditions":[{
+            "stat": "fait",
+            "amount": 5
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Dont stop!!."
+        }]
+    },
+    "ready-for-first-member": {
+        "done": 0,
+        "conditions":[{
+            "stat": "fait",
+            "amount": 10
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Is time to recruit new members."
+        },
+        {
+            "type": "display",
+            "object": "#members-row"
+        },
+        {
+            "type": "display",
+            "object": "#recruit-btn"
+        }]
+    },
+    "first-member": {
+        "done": 0,
+        "conditions":[{
+            "stat": "members",
+            "amount": 1
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Each new member will pray with you and make your fait grow."
+        }]
+    },
+    "discover-forest": {
+        "done": 0,
+        "conditions":[{
+            "stat": "members",
+            "amount": 10
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Explore the nearby forest and make sacrifices to bless the land."
+        },
+        {
+            "type": "display",
+            "object": "#forest-menu"
+        }]
+    }
+};
+
 // Load saved game stats
 $(document).ready(function(){
     var savedGameStats = JSON.parse(localStorage.getItem('gameStats'));
@@ -64,8 +134,14 @@ function updateLabels(){
     Object.keys(gameStats).forEach(stat => {
         $('#label-'+stat+'-pts').text(gameStats[stat].points);
         $('#label-'+stat+'-inc').text(gameStats[stat].increment);
+
         if(gameStats[stat].cost != undefined){
             $('#label-'+stat+'-cost').text(gameStats[stat].cost.amount);
+            $('#label-'+stat+'-cost-stat').text(gameStats[stat].cost.stat);
+        }
+
+        if(gameStats[stat].product != undefined){
+            $('#label-'+stat+'-product').text(gameStats[stat].product.amount);
         }
 
     });
@@ -81,15 +157,53 @@ function updatePoints(){
     });
 }
 
+// Ejecute all the events if the conditions are ok
+function updateEvents(){
+    Object.keys(gameEvents).forEach(event => {
+        if(gameEvents[event].done == 0){ // Only process events not done
+            var canBeDone = true;
+            for (var conditionIndex in gameEvents[event].conditions) { // Validate conditions
+                var condition = gameEvents[event].conditions[conditionIndex];
+                if(gameStats[condition.stat].points < condition.amount){
+                    canBeDone = false;
+                }
+            }
+
+            if(canBeDone){ // Excecute results
+                gameEvents[event].done = 1;
+                for (var resultIndex in gameEvents[event].results) {
+                    var result = gameEvents[event].results[resultIndex];
+                    switch (result.type) {
+                        case "log":
+                            addLog(result.message);
+                            break;
+                        case "display":
+                            $(result.object).show();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+    });
+}
+
 // Recalculate and Refresh for the interval
 function updateGame(){
     updatePoints();
     updateLabels();
+    updateEvents();
     localStorage.setItem('gameStats', JSON.stringify(gameStats));
 }
 
 // Interval (cicle of the game)
 var intervalID = window.setInterval(updateGame, 1000);
+
+function addLog(message){
+    $('.log').prepend('<small>'+message+'</small>');
+}
 
 // Update the Increment of a Stat when it is purchased (+) or used (-)
 function updateIncrement(stat, qty, purchased){

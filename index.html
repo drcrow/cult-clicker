@@ -28,10 +28,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">Town</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
+                        <li id="cult-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
+                        <li id="forest-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
+                        <li id="town-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">Town</a></li>
+                        <li id="help-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,14 +42,14 @@
         <div class="block block-cult bg-light p-2 m-2 rounded">
             <h2>Cult</h2>
             <table class="table table-sm">
-                <tr><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
-                <tr><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
-                <tr><td class="fitwidth">Money</td><td><span id="label-money-pts">X</span></td><td class="fitwidth"><span id="label-money-inc">X</span>/sec</td></tr>
+                <tr id="fait-row"><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
+                <tr id="members-row" style="display: none;"><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
+                <tr id="money-row" style="display: none;"><td class="fitwidth">Money</td><td><span id="label-money-pts">X</span></td><td class="fitwidth"><span id="label-money-inc">X</span>/sec</td></tr>
             </table>
             <div class="d-grid gap-2">
-                <button class="btn btn-sm btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
-                <button class="btn btn-sm btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
-                <button class="btn btn-sm btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> Members) (+10 Money)</small></button>
+                <button id="pray-btn" class="btn btn-sm btn-secondary" type="button" onclick="pray();">PRAY<br><small>He needs your prayers!!</small></button>
+                <button id="recruit-btn" style="display: none;" class="btn btn-sm btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> <span id="label-members-cost-stat">X</span>)</small></button>
+                <button id="collect-btn" style="display: none;" class="btn btn-sm btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> <span id="label-money-cost-stat">X</span>)</small></button>
             </div>
         </div>
         <!--/CULT-->
@@ -58,8 +58,8 @@
         <div class="block block-forest bg-light p-2 m-2 rounded" style="display: none;">
             <h2>Forest</h2>
             <table class="table table-sm">
-                <tr><td class="fitwidth">Magic</td><td><span id="label-magic-pts">X</span></td><td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td></tr>
-                <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
+                <tr id="magic-row"><td class="fitwidth">Magic</td><td><span id="label-magic-pts">X</span></td><td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td></tr>
+                <tr id="land-row"><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
             </table>
             <div class="d-grid gap-2">
                 <button class="btn btn-secondary" type="button" onclick="takeLand();">TAKE LAND<br><small>(-<span id="label-land-cost">X</span> Members) (+1 Magic)</small></button>
@@ -71,10 +71,10 @@
         <div class="block block-town bg-light p-2 m-2 rounded" style="display: none;">
             <h2>Town</h2>
             <table class="table table-sm">
-                <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
+                <tr><td class="fitwidth">Houses</td><td><span id="label-houses-pts">X</span></td><td class="fitwidth"><span id="label-houses-inc">X</span>/sec</td></tr>
             </table>
             <div class="d-grid gap-2">
-                <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(-<span id="label-land-cost">X</span> Money) (+1 Magic)</small></button>
+                <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY HOUSE<br><small>(-<span id="label-house-cost">X</span> Money) (+2 Members)</small></button>
             </div>
         </div>
         <!--/TOWN-->
@@ -94,31 +94,9 @@
     <div id="section-bottom">
         <!--LOG-->
         <div class="log bg-light p-2 m-2 rounded">
+            <!--<small>This is a log line</small>
             <small class="log-danger">This is a log line indicating danger</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small class="log-success">This is a log line showing some success</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small class="log-success">This is a log line showing some success</small>
-            <small class="log-success">This is a log line showing some success</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line showing some longer text to test the aspect of the game in this specific condition</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small class="log-danger">This is a log line indicating danger</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small class="log-danger">This is a log line indicating danger</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
-            <small>This is a log line</small>
+            <small class="log-success">This is a log line showing some success</small>-->
         </div>
         <!--/LOG-->
     </div>
