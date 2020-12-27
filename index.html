@@ -34,7 +34,7 @@
 
     <div class="block block-cult bg-light p-4 m-2 rounded">
         <h1>Cult</h1>
-        <table class="table">
+        <table class="table table-sm">
             <tr><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
             <tr><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
             <tr><td class="fitwidth">Money</td><td><span id="label-money-pts">X</span></td><td class="fitwidth"><span id="label-money-inc">X</span>/sec</td></tr>
@@ -48,9 +48,11 @@
 
     <div class="block block-forest bg-light p-4 m-2 rounded" style="display: none;">
         <h1>Forest</h1>
-        <p>Land: <span id="label-fait-pts">X</span> (<span id="label-fait-inc">X</span>/sec)</p>
+        <table class="table table-sm">
+            <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
+        </table>
         <div class="d-grid gap-2">
-            <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(+1 Fait)</small></button>
+            <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(-<span id="label-land-cost">X</span> Money) (+1 Fait)</small></button>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 body {
     padding-top: 4.5rem;
     font-family: 'Roboto Mono', monospace;
-    background-image: url('images/bg_woods.png');
+    background: url('images/bg_woods.png') top;
 }
 
 .block{
