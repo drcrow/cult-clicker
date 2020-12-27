@@ -74,15 +74,15 @@ body {
     height: 45%;
 }
 
-.log span {
-    color: gray;
-    display: block;
+.log small {
+    color: gray !important;
+    display: block !important;
 }
 
 .log .log-danger {
-    color:red;
+    color:red !important;
 }
 
 .log .log-success {
-    color:green;
+    color:green !important;
 }
