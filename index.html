@@ -18,106 +18,110 @@
 </head>
 <body class="bg_cult">
 
-    <!--NAVBAR-->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Cult Clicker v0.1</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">Town</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
-                </ul>
+    <div id="section-top">
+        <!--NAVBAR-->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Cult Clicker v0.1</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">Town</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--/NAVBAR-->
+
+        <!--CULT-->
+        <div class="block block-cult bg-light p-2 m-2 rounded">
+            <h2>Cult</h2>
+            <table class="table table-sm">
+                <tr><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
+                <tr><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
+                <tr><td class="fitwidth">Money</td><td><span id="label-money-pts">X</span></td><td class="fitwidth"><span id="label-money-inc">X</span>/sec</td></tr>
+            </table>
+            <div class="d-grid gap-2">
+                <button class="btn btn-sm btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
+                <button class="btn btn-sm btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
+                <button class="btn btn-sm btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> Members) (+10 Money)</small></button>
             </div>
         </div>
-    </nav>
-    <!--/NAVBAR-->
+        <!--/CULT-->
 
-    <!--CULT-->
-    <div class="block block-cult bg-light p-2 m-2 rounded">
-        <h2>Cult</h2>
-        <table class="table table-sm">
-            <tr><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
-            <tr><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
-            <tr><td class="fitwidth">Money</td><td><span id="label-money-pts">X</span></td><td class="fitwidth"><span id="label-money-inc">X</span>/sec</td></tr>
-        </table>
-        <div class="d-grid gap-2">
-            <button class="btn btn-sm btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
-            <button class="btn btn-sm btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
-            <button class="btn btn-sm btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> Members) (+10 Money)</small></button>
+        <!--FOREST-->
+        <div class="block block-forest bg-light p-2 m-2 rounded" style="display: none;">
+            <h2>Forest</h2>
+            <table class="table table-sm">
+                <tr><td class="fitwidth">Magic</td><td><span id="label-magic-pts">X</span></td><td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td></tr>
+                <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
+            </table>
+            <div class="d-grid gap-2">
+                <button class="btn btn-secondary" type="button" onclick="takeLand();">TAKE LAND<br><small>(-<span id="label-land-cost">X</span> Members) (+1 Magic)</small></button>
+            </div>
         </div>
-    </div>
-    <!--/CULT-->
+        <!--/FOREST-->
 
-    <!--FOREST-->
-    <div class="block block-forest bg-light p-2 m-2 rounded" style="display: none;">
-        <h2>Forest</h2>
-        <table class="table table-sm">
-            <tr><td class="fitwidth">Magic</td><td><span id="label-magic-pts">X</span></td><td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td></tr>
-            <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
-        </table>
-        <div class="d-grid gap-2">
-            <button class="btn btn-secondary" type="button" onclick="takeLand();">TAKE LAND<br><small>(-<span id="label-land-cost">X</span> Members) (+1 Magic)</small></button>
+        <!--TOWN-->
+        <div class="block block-town bg-light p-2 m-2 rounded" style="display: none;">
+            <h2>Town</h2>
+            <table class="table table-sm">
+                <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
+            </table>
+            <div class="d-grid gap-2">
+                <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(-<span id="label-land-cost">X</span> Money) (+1 Magic)</small></button>
+            </div>
         </div>
-    </div>
-    <!--/FOREST-->
+        <!--/TOWN-->
 
-    <!--TOWN-->
-    <div class="block block-town bg-light p-2 m-2 rounded" style="display: none;">
-        <h2>Town</h2>
-        <table class="table table-sm">
-            <tr><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
-        </table>
-        <div class="d-grid gap-2">
-            <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY<br><small>(-<span id="label-land-cost">X</span> Money) (+1 Magic)</small></button>
+        <!--HELP-->
+        <div class="block block-help bg-light p-2 m-2 rounded" style="display: none;">
+            <h2>About / Help</h2>
+            <p>Cult Clicker by <a href="https://drcrow.github.io/resume/">Dr. CroW</a> - 2020</p>
+            <p>I love the incremental/idle/clicker text based kind of games so decided to build one for myself. I hope you enjoy playing it as much as I enjoyed creating it.</p>
+            <div class="d-grid gap-2">
+                <button class="btn btn-secondary" type="button" onclick="resetGame();">RESET GAME<br><small>All progress will be lost!!</small></button>
+            </div>
         </div>
+        <!--/HELP-->
     </div>
-    <!--/TOWN-->
 
-    <!--HELP-->
-    <div class="block block-help bg-light p-2 m-2 rounded" style="display: none;">
-        <h2>About / Help</h2>
-        <p>Cult Clicker by <a href="https://drcrow.github.io/resume/">Dr. CroW</a> - 2020</p>
-        <p>I love the incremental/idle/clicker text based kind of games so decided to build one for myself. I hope you enjoy playing it as much as I enjoyed creating it.</p>
-        <div class="d-grid gap-2">
-            <button class="btn btn-secondary" type="button" onclick="resetGame();">RESET GAME<br><small>All progress will be lost!!</small></button>
+    <div id="section-bottom">
+        <!--LOG-->
+        <div class="log bg-light p-2 m-2 rounded">
+            <small class="log-danger">This is a log line indicating danger</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small class="log-success">This is a log line showing some success</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small class="log-success">This is a log line showing some success</small>
+            <small class="log-success">This is a log line showing some success</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line showing some longer text to test the aspect of the game in this specific condition</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small class="log-danger">This is a log line indicating danger</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small class="log-danger">This is a log line indicating danger</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
+            <small>This is a log line</small>
         </div>
+        <!--/LOG-->
     </div>
-    <!--/HELP-->
-
-    <!--LOG-->
-    <div class="log bg-light p-2 m-2 rounded">
-        <small class="log-danger">This is a log line indicating danger</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small class="log-success">This is a log line showing some success</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small class="log-success">This is a log line showing some success</small>
-        <small class="log-success">This is a log line showing some success</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line showing some longer text to test the aspect of the game in this specific condition</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small class="log-danger">This is a log line indicating danger</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small class="log-danger">This is a log line indicating danger</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-        <small>This is a log line</small>
-    </div>
-    <!--/LOG-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts.js"></script>

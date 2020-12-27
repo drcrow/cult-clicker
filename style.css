@@ -67,7 +67,7 @@ body {
 }
 
 .log {
-    overflow: scroll;
+    overflow-y: scroll;
     background: rgba(70, 70, 70, .9) !important;
 
     position: absolute;
