@@ -36,6 +36,20 @@ var gameStats = {
     },
 };
 
+// Load saved game stats
+$(document).ready(function(){
+    var savedGameStats = JSON.parse(localStorage.getItem('gameStats'));
+    if(savedGameStats != null){
+        gameStats = savedGameStats;
+    }
+});
+
+// Reset saved game stats
+function resetGame(){
+    localStorage.setItem('gameStats', null);
+    location.reload();
+}
+
 // Refresh the values of all the stats labels
 function updateLabels(){
     Object.keys(gameStats).forEach(stat => {
@@ -62,6 +76,7 @@ function updatePoints(){
 function updateGame(){
     updatePoints();
     updateLabels();
+    localStorage.setItem('gameStats', JSON.stringify(gameStats));
 }
 
 // Interval (cicle of the game)
