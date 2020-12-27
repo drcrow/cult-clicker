@@ -1,0 +1,13 @@
+body {
+    padding-top: 4.5rem;
+    font-family: 'Roboto Mono', monospace;
+    background-image: url('images/bg_woods.png');
+}
+
+#block-start{
+    background: rgba(70, 70, 70, .8) !important;
+}
+
+#block-start p{
+    color: aliceblue;
+}
