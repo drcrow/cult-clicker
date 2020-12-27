@@ -15,3 +15,12 @@ body {
 .block p{
     color: aliceblue;
 }
+
+.block table{
+    color: aliceblue;
+}
+
+.block table td.fitwidth {
+    width: 1px;
+    white-space: nowrap;
+}

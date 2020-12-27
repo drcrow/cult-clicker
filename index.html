@@ -34,13 +34,15 @@
 
     <div class="block block-cult bg-light p-4 m-2 rounded">
         <h1>Cult</h1>
-        <p>Fait: <span id="label-fait-pts">X</span> (<span id="label-fait-inc">X</span>/sec)</p>
-        <p>Members: <span id="label-members-pts">X</span> (<span id="label-members-inc">X</span>/sec)</p>
-        <p>Money: <span id="label-money-pts">X</span> (<span id="label-money-inc">X</span>/sec)</p>
+        <table class="table">
+            <tr><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
+            <tr><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
+            <tr><td class="fitwidth">Money</td><td><span id="label-money-pts">X</span></td><td class="fitwidth"><span id="label-money-inc">X</span>/sec</td></tr>
+        </table>
         <div class="d-grid gap-2">
-            <button class="btn btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
-            <button class="btn btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
-            <button class="btn btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> Members) (+10 Money)</small></button>
+            <button class="btn btn-sm btn-secondary" type="button" onclick="pray();">PRAY<br><small>(+1 Fait)</small></button>
+            <button class="btn btn-sm btn-secondary" type="button" onclick="recruit();">RECRUIT<br><small>(-<span id="label-members-cost">X</span> Fait) (+1 Members)</small></button>
+            <button class="btn btn-sm btn-secondary" type="button" onclick="collect();">COLLECT<br><small>(-<span id="label-money-cost">X</span> Members) (+10 Money)</small></button>
         </div>
     </div>
 
