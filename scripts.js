@@ -46,6 +46,7 @@ $(document).ready(function(){
 
 // Reset saved game stats
 function resetGame(){
+    clearInterval(intervalID);
     localStorage.setItem('gameStats', null);
     location.reload();
 }
