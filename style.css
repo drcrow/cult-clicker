@@ -9,6 +9,10 @@ body {
     background-color: black;
 }
 
+#days-view {
+    color: #fff;
+}
+
 #section-top {
     font-size: .8rem;
 }
@@ -57,7 +61,7 @@ body {
     color: aliceblue;
 }
 
-.block h2 {
+.block h5 {
     color: aliceblue;
 }
 

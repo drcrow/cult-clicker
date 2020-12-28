@@ -1,8 +1,16 @@
 
 
+// Recalculate and Refresh for the interval
+function updateGame(){
+    window.days++;
+    $('#days-view').text(formatDays(days));
+    localStorage.setItem('days', days);
 
-
-
+    updatePoints();
+    updateLabels();
+    updateEvents();
+    localStorage.setItem('gameStats', JSON.stringify(gameStats));
+}
 
 // Load saved game stats
 $(document).ready(function(){
@@ -10,12 +18,21 @@ $(document).ready(function(){
     if(savedGameStats != null){
         gameStats = savedGameStats;
     }
+
+    window.days = localStorage.getItem('days');
+    if(isNaN(window.days)){
+        window.days = 0;
+    }
+
+    // Interval (cicle of the game) Each cicle is a day
+    window.intervalID = window.setInterval(updateGame, 1000);
 });
 
 // Reset saved game stats
 function resetGame(){
-    clearInterval(intervalID);
+    clearInterval(window.intervalID);
     localStorage.setItem('gameStats', null);
+    localStorage.setItem('days', null);
     location.reload();
 }
 
@@ -79,17 +96,6 @@ function updateEvents(){
 
     });
 }
-
-// Recalculate and Refresh for the interval
-function updateGame(){
-    updatePoints();
-    updateLabels();
-    updateEvents();
-    localStorage.setItem('gameStats', JSON.stringify(gameStats));
-}
-
-// Interval (cicle of the game)
-var intervalID = window.setInterval(updateGame, 1000);
 
 function addLog(message){
     $('.log').prepend('<small>'+message+'</small>');
@@ -176,3 +182,23 @@ function showBlock(block){
     $('body').removeClass('bg_cult bg_forest bg_town bg_help');
     $('body').addClass('bg_'+block);
 }
+
+// Format days (cicles)
+function formatDays (diff) {
+    // The string we're working with to create the representation
+    var str = '';
+    // Map lengths of `diff` to different time periods
+    var values = [['y', 365], ['m', 30], ['d', 1]];
+    // Iterate over the values...
+    for (var i=0;i<values.length;i++) {
+      var amount = Math.floor(diff / values[i][1]);
+      // ... and find the largest time value that fits into the diff
+      if (amount >= 1) {
+         // If we match, add to the string ('s' is for pluralization)
+         str += amount + values[i][0] + (amount > 1 ? 's' : '') + ' ';
+         // and subtract from the diff
+         diff -= amount * values[i][1];
+      }
+    }
+    return str;
+  }
