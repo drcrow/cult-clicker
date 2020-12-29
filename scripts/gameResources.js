@@ -1,4 +1,4 @@
-var gameStats = {
+var gameResources = {
 
     "time": { // Time is only used to count the past of time
         "points": 0,    // Current points
@@ -19,16 +19,16 @@ var gameStats = {
         "points": 0,
         "increment": 0,
         "cost": [{
-            "stat": "fait",
+            "resource": "fait",
             "amount": 10,
             "modifier": 1.1
         },{
-            "stat": "knowledge",
+            "resource": "knowledge",
             "amount": 10,
             "modifier": 1.1
         },],
         "product": [{
-            "stat": "magic",
+            "resource": "magic",
             "amount": 1
         }]
     },
@@ -42,12 +42,12 @@ var gameStats = {
         "points": 0,
         "increment": 0,
         "cost": [{
-            "stat": "fait",
+            "resource": "fait",
             "amount": 10,
             "modifier": 1.1
         }],
         "product": [{
-            "stat": "fait",
+            "resource": "fait",
             "amount": 1
         }]
     },
@@ -56,7 +56,7 @@ var gameStats = {
         "points": 0,
         "increment": 0,
         "cost": {
-            "stat": "members",
+            "resource": "members",
             "amount": 1,
             "modifier": 1.1
         }
@@ -65,12 +65,12 @@ var gameStats = {
         "points": 0,
         "increment": 0,
         "cost": {
-            "stat": "members",
+            "resource": "members",
             "amount": 10,
             "modifier": 1.1
         },
         "product": {
-            "stat": "magic",
+            "resource": "magic",
             "amount": 1
         }
     },

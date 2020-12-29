@@ -3,7 +3,7 @@ var gameEvents = {
     "game-start-1": {
         "done": 0,
         "conditions":[{
-            "stat": "time",
+            "resource": "time",
             "amount": 0
         }],
         "results": [{
@@ -15,7 +15,7 @@ var gameEvents = {
     "game-start-2": {
         "done": 0,
         "conditions":[{
-            "stat": "time",
+            "resource": "time",
             "amount": 5
         }],
         "results": [{
@@ -27,7 +27,7 @@ var gameEvents = {
     "is-praying": {
         "done": 0,
         "conditions":[{
-            "stat": "fait",
+            "resource": "fait",
             "amount": 5
         }],
         "results": [{
@@ -39,7 +39,7 @@ var gameEvents = {
     "is-studying": {
         "done": 0,
         "conditions":[{
-            "stat": "knowledge",
+            "resource": "knowledge",
             "amount": 5
         }],
         "results": [{
@@ -51,10 +51,10 @@ var gameEvents = {
     "ready-for-write": {
         "done": 0,
         "conditions":[{
-            "stat": "fait",
+            "resource": "fait",
             "amount": 10
         },{
-            "stat": "knowledge",
+            "resource": "knowledge",
             "amount": 10
         }],
         "results": [{
@@ -72,7 +72,7 @@ var gameEvents = {
     "first-grimoires": {
         "done": 0,
         "conditions":[{
-            "stat": "grimoires",
+            "resource": "grimoires",
             "amount": 1
         }],
         "results": [{
@@ -87,10 +87,10 @@ var gameEvents = {
     "new-area-town": {
         "done": 0,
         "conditions":[{
-            "stat": "fait",
+            "resource": "fait",
             "amount": 50
         },{
-            "stat": "knowledge",
+            "resource": "knowledge",
             "amount": 50
         }],
         "results": [{
@@ -106,7 +106,7 @@ var gameEvents = {
     "first-member": {
         "done": 0,
         "conditions":[{
-            "stat": "members",
+            "resource": "members",
             "amount": 1
         }],
         "results": [{
@@ -117,7 +117,7 @@ var gameEvents = {
     "discover-forest": {
         "done": 0,
         "conditions":[{
-            "stat": "members",
+            "resource": "members",
             "amount": 10
         }],
         "results": [{

@@ -1,10 +1,10 @@
 /**
- * Load saved game stats and start interval
+ * Load saved game resources and start interval
  */
 $(document).ready(function() {
-    var savedGameStats = JSON.parse(localStorage.getItem('gameStats'));
+    var savedGameStats = JSON.parse(localStorage.getItem('gameResources'));
     if(savedGameStats != null){
-        gameStats = savedGameStats;
+        gameResources = savedGameStats;
     }
 
     // Interval (cicle of the game) Each cicle is a day
@@ -18,46 +18,46 @@ function updateGame() {
     updatePoints();
     updateLabels();
     runEvents();
-    localStorage.setItem('gameStats', JSON.stringify(gameStats));
+    localStorage.setItem('gameResources', JSON.stringify(gameResources));
 }
 
 /**
- * Apply the autoincrement for stats points
+ * Apply the autoincrement for resources points
  */
 function updatePoints() {
-    Object.keys(gameStats).forEach(stat => {
-        if(gameStats[stat].increment != 0){
-            gameStats[stat].points = gameStats[stat].points + gameStats[stat].increment;
+    Object.keys(gameResources).forEach(resource => {
+        if(gameResources[resource].increment != 0){
+            gameResources[resource].points = gameResources[resource].points + gameResources[resource].increment;
         }
 
     });
 }
 
 /**
- * Refresh the values of all the stats labels
+ * Refresh the values of all the resources labels
  */
 function updateLabels() {
 
     // time indicator
-   $('#days-view').text(formatDays(gameStats.time.points));
+   $('#days-view').text(formatDays(gameResources.time.points));
 
-   Object.keys(gameStats).forEach(stat => {
+   Object.keys(gameResources).forEach(resource => {
 
        // table of values
-       $('#label-'+stat+'-pts').text(gameStats[stat].points);
-       $('#label-'+stat+'-inc').text(gameStats[stat].increment);
+       $('#label-'+resource+'-pts').text(gameResources[resource].points);
+       $('#label-'+resource+'-inc').text(gameResources[resource].increment);
 
        // costs in buttons
-       if(gameStats[stat].cost != undefined){
+       if(gameResources[resource].cost != undefined){
 
            var costText = '';
 
-           for (var costIndex in gameStats[stat].cost) {
-               var cost = gameStats[stat].cost[costIndex];
-               costText = costText + ' -' + cost.amount + ' ' + cost.stat;
+           for (var costIndex in gameResources[resource].cost) {
+               var cost = gameResources[resource].cost[costIndex];
+               costText = costText + ' -' + cost.amount + ' ' + cost.resource;
            }
 
-           $('#'+stat+'-cost').text(costText);
+           $('#'+resource+'-cost').text(costText);
        }
 
    });
@@ -72,7 +72,7 @@ function runEvents() {
             var canBeDone = true;
             for (var conditionIndex in gameEvents[event].conditions) { // Validate conditions
                 var condition = gameEvents[event].conditions[conditionIndex];
-                if(gameStats[condition.stat].points < condition.amount){
+                if(gameResources[condition.resource].points < condition.amount){
                     canBeDone = false;
                 }
             }
@@ -102,11 +102,11 @@ function runEvents() {
 }
 
 /**
- * Reset saved game stats
+ * Reset saved game resources
  */
 function resetGame() {
     clearInterval(window.intervalID);
-    localStorage.setItem('gameStats', null);
+    localStorage.setItem('gameResources', null);
     location.reload();
 }
 
@@ -128,13 +128,13 @@ function addLog(message, type) {
 }
 
 /**
- * Execute an action from one button (in generl, to gain some stat)
+ * Execute an action from one button (in generl, to gain some resource)
  */
 function doAction(action) {
     switch(action){
         case 'pray':
             buyStat('fait', 1);
-            //consumeStat(stat, qty);
+            //consumeStat(resource, qty);
             break;
         case 'study':
             buyStat('knowledge', 1);
@@ -151,52 +151,52 @@ function doAction(action) {
 }
 
 /**
- * Increment the points of a stat (in general by click an action button)
+ * Increment the points of a resource (in general by click an action button)
  */
-function buyStat(stat, qty) {
+function buyStat(resource, qty) {
     // 1: Check costs
-    if(gameStats[stat].cost != undefined){
-        for (var costIndex in gameStats[stat].cost) {
-            var cost = gameStats[stat].cost[costIndex];
-            if(gameStats[cost.stat].points < (cost.amount * qty)){
-                addLog('Not enough '+cost.stat, 'danger');
+    if(gameResources[resource].cost != undefined){
+        for (var costIndex in gameResources[resource].cost) {
+            var cost = gameResources[resource].cost[costIndex];
+            if(gameResources[cost.resource].points < (cost.amount * qty)){
+                addLog('Not enough '+cost.resource, 'danger');
                 return false;
             }
         }
     }
 
     // 2: Pay costs
-    if(gameStats[stat].cost != undefined){
-        for (var costIndex in gameStats[stat].cost) {
-            var cost = gameStats[stat].cost[costIndex];
-            consumeStat(cost.stat, cost.amount);
+    if(gameResources[resource].cost != undefined){
+        for (var costIndex in gameResources[resource].cost) {
+            var cost = gameResources[resource].cost[costIndex];
+            consumeStat(cost.resource, cost.amount);
             // Increment modifier of the cost
-            gameStats[stat].cost[costIndex].amount = Math.round(gameStats[stat].cost[costIndex].amount * gameStats[stat].cost[costIndex].modifier);
+            gameResources[resource].cost[costIndex].amount = Math.round(gameResources[resource].cost[costIndex].amount * gameResources[resource].cost[costIndex].modifier);
         }
     }
 
     // 3: Add qty to the Stat
-    gameStats[stat].points = gameStats[stat].points + qty;
+    gameResources[resource].points = gameResources[resource].points + qty;
 
-    // 4: If the stat has some "product", update the product's increments
-    if(gameStats[stat].product != undefined){
-        for (var productIndex in gameStats[stat].product) {
-            var product = gameStats[stat].product[productIndex];
-            gameStats[product.stat].increment = gameStats[product.stat].increment + (qty * product.amount);
+    // 4: If the resource has some "product", update the product's increments
+    if(gameResources[resource].product != undefined){
+        for (var productIndex in gameResources[resource].product) {
+            var product = gameResources[resource].product[productIndex];
+            gameResources[product.resource].increment = gameResources[product.resource].increment + (qty * product.amount);
         }
     }
 }
 
 /**
- * Decrement the points of a stat (in general consumed by an action)
- * If the stat has a "product" (autoincrement other stat) this autoincrement must be modified
+ * Decrement the points of a resource (in general consumed by an action)
+ * If the resource has a "product" (autoincrement other resource) this autoincrement must be modified
  */
-function consumeStat(stat, qty) {
-    gameStats[stat].points = gameStats[stat].points - qty;
-    if(gameStats[stat].product != undefined){
-        for (var productIndex in gameStats[stat].product) {
-            var product = gameStats[stat].product[productIndex];
-            gameStats[product.stat].increment = gameStats[product.stat].increment - (qty * product.amount);
+function consumeStat(resource, qty) {
+    gameResources[resource].points = gameResources[resource].points - qty;
+    if(gameResources[resource].product != undefined){
+        for (var productIndex in gameResources[resource].product) {
+            var product = gameResources[resource].product[productIndex];
+            gameResources[product.resource].increment = gameResources[product.resource].increment - (qty * product.amount);
         }
     }
 }
