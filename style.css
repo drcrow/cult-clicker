@@ -13,6 +13,11 @@ body {
     color: #fff;
 }
 
+#paypal-form {
+    text-align: center;
+    margin: 20px;
+}
+
 #section-top {
     font-size: .8rem;
 }

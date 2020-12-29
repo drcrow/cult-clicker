@@ -119,10 +119,17 @@
         <!--HELP-->
         <div class="block block-help bg-light p-2 m-2 rounded" style="display: none;">
             <h5>About / Help</h5>
-            <p>Cult Clicker by <a href="https://drcrow.github.io/resume/">Dr. CroW</a> - 2020</p>
-            <p>I love the incremental/idle/clicker text based kind of games so decided to build one for myself. I hope you enjoy playing it as much as I enjoyed creating it.</p>
+            <p>&copy; <a href="https://drcrow.github.io/resume/">Dr. CroW</a> - 2020 - Argentina</p>
+            <p>This game is the result of being a programmer, fan of Lovecraft and browser-based incremental games.</p>
+
+            <form id="paypal-form" action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="hosted_button_id" value="K56PWE4SH3UA8" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+            </form>
+
             <div class="d-grid gap-2">
-                <button class="btn btn-secondary" type="button" onclick="resetGame();">RESET GAME<br><small>All progress will be lost!!</small></button>
+                <button class="btn btn-danger" type="button" onclick="resetGame();">RESET GAME<br><small>All progress will be lost!!</small></button>
             </div>
         </div>
         <!--/HELP-->
