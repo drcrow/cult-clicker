@@ -61,11 +61,11 @@ var gameEvents = {
             "type": "log",
             "message": "Leave a written record of what grows in your mind and soul."
         },{
-            "type": "display",
-            "object": "#grimoires-row"
+            "type": "display-resource",
+            "element": "#grimoires-row"
         },{
-            "type": "display",
-            "object": "#write-btn"
+            "type": "display-action",
+            "element": "#write-btn"
         }]
     },
 
@@ -79,8 +79,8 @@ var gameEvents = {
             "type": "log",
             "message": "Your grimoires will help you grow your magic power."
         },{
-            "type": "display",
-            "object": "#magic-row"
+            "type": "display-resource",
+            "element": "#magic-row"
         }]
     },
 
@@ -98,8 +98,8 @@ var gameEvents = {
             "logtype": "success",
             "message": "New area accesible: Town."
         },{
-            "type": "display",
-            "object": "#town-menu"
+            "type": "display-area",
+            "element": "#town-menu"
         }]
     },
 
@@ -125,8 +125,8 @@ var gameEvents = {
             "message": "Explore the nearby forest and make sacrifices to bless the land."
         },
         {
-            "type": "display",
-            "object": "#forest-menu"
+            "type": "display-area",
+            "element": "#forest-menu"
         }]
     }
 };

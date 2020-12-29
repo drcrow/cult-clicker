@@ -43,11 +43,6 @@
         <div class="block block-home bg-light p-2 m-2 rounded">
             <h5>Home</h5>
             <table class="table table-sm">
-                <tr id="magic-row" style="display: none;">
-                    <td class="fitwidth">Magic</td>
-                    <td><span id="label-magic-pts">X</span></td>
-                    <td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td>
-                </tr>
                 <tr id="fait-row">
                     <td class="fitwidth">Fait</td>
                     <td><span id="label-fait-pts">X</span></td>
@@ -62,6 +57,11 @@
                     <td class="fitwidth">Grimoires</td>
                     <td><span id="label-grimoires-pts">X</span></td>
                     <td class="fitwidth"><span id="label-grimoires-inc">X</span>/sec</td>
+                </tr>
+                <tr id="magic-row" style="display: none;">
+                    <td class="fitwidth">Magic</td>
+                    <td><span id="label-magic-pts">X</span></td>
+                    <td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td>
                 </tr>
             </table>
             <div class="d-grid gap-2">
@@ -108,7 +108,6 @@
         <div class="block block-forest bg-light p-2 m-2 rounded" style="display: none;">
             <h5>Forest</h5>
             <table class="table table-sm">
-                <tr id="magic-row"><td class="fitwidth">Magic</td><td><span id="label-magic-pts">X</span></td><td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td></tr>
                 <tr id="land-row"><td class="fitwidth">Land</td><td><span id="label-land-pts">X</span></td><td class="fitwidth"><span id="label-land-inc">X</span>/sec</td></tr>
             </table>
             <div class="d-grid gap-2">
@@ -145,6 +144,7 @@
     <script src="scripts/gameStats.js"></script>
     <script src="scripts/gameEvents.js"></script>
     <script src="scripts/gameRandomEvents.js"></script>
+    <script src="scripts/gameElements.js"></script>
     <script src="scripts/scripts.js"></script>
     <!--/GAME-->
 </body>

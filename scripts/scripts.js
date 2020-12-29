@@ -88,6 +88,9 @@ function runEvents() {
                         case "display":
                             $(result.object).show();
                             break;
+                        case "activate-area":
+                            activateElement('area', result.element, true);
+                            break;
                         default:
                             break;
                     }
