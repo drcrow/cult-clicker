@@ -2,9 +2,9 @@
  * Load saved game resources and start interval
  */
 $(document).ready(function() {
-    var savedGameStats = JSON.parse(localStorage.getItem('gameResources'));
-    if(savedGameStats != null){
-        gameResources = savedGameStats;
+    var savedGameResources = JSON.parse(localStorage.getItem('gameResources'));
+    if(savedGameResources != null){
+        gameResources = savedGameResources;
     }
 
     // Interval (cicle of the game) Each cicle is a day
@@ -133,17 +133,17 @@ function addLog(message, type) {
 function doAction(action) {
     switch(action){
         case 'pray':
-            buyStat('fait', 1);
-            //consumeStat(resource, qty);
+            buyResource('fait', 1);
+            //consumeResource(resource, qty);
             break;
         case 'study':
-            buyStat('knowledge', 1);
+            buyResource('knowledge', 1);
             break;
         case 'write':
-            buyStat('grimoires', 1);
+            buyResource('grimoires', 1);
             break;
         case 'recruit':
-            buyStat('members', 1);
+            buyResource('members', 1);
             break;
     }
 
@@ -153,7 +153,7 @@ function doAction(action) {
 /**
  * Increment the points of a resource (in general by click an action button)
  */
-function buyStat(resource, qty) {
+function buyResource(resource, qty) {
     // 1: Check costs
     if(gameResources[resource].cost != undefined){
         for (var costIndex in gameResources[resource].cost) {
@@ -169,13 +169,13 @@ function buyStat(resource, qty) {
     if(gameResources[resource].cost != undefined){
         for (var costIndex in gameResources[resource].cost) {
             var cost = gameResources[resource].cost[costIndex];
-            consumeStat(cost.resource, cost.amount);
+            consumeResource(cost.resource, cost.amount);
             // Increment modifier of the cost
             gameResources[resource].cost[costIndex].amount = Math.round(gameResources[resource].cost[costIndex].amount * gameResources[resource].cost[costIndex].modifier);
         }
     }
 
-    // 3: Add qty to the Stat
+    // 3: Add qty to the Resource
     gameResources[resource].points = gameResources[resource].points + qty;
 
     // 4: If the resource has some "product", update the product's increments
@@ -191,7 +191,7 @@ function buyStat(resource, qty) {
  * Decrement the points of a resource (in general consumed by an action)
  * If the resource has a "product" (autoincrement other resource) this autoincrement must be modified
  */
-function consumeStat(resource, qty) {
+function consumeResource(resource, qty) {
     gameResources[resource].points = gameResources[resource].points - qty;
     if(gameResources[resource].product != undefined){
         for (var productIndex in gameResources[resource].product) {
