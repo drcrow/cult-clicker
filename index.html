@@ -50,11 +50,23 @@
             </table>
             <div class="d-grid gap-2">
                 <button id="pray-btn" class="btn btn-sm btn-secondary" type="button" onclick="doAction('pray');">PRAY<br><small>He needs your prayers!!</small></button>
-                <button id="pray-btn" class="btn btn-sm btn-secondary" type="button" onclick="doAction('study');">STUDY<br><small>Knowledge is power!!</small></button>
+                <button id="study-btn" class="btn btn-sm btn-secondary" type="button" onclick="doAction('study');">STUDY<br><small>Knowledge is power!!</small></button>
                 <button id="write-btn" style="display: none;" class="btn btn-sm btn-secondary" type="button" onclick="doAction('write');">WRITE<br><small id="grimoires-cost">X</small></button>
             </div>
         </div>
         <!--/HOME-->
+
+        <!--TOWN-->
+        <div class="block block-town bg-light p-2 m-2 rounded" style="display: none;">
+            <h5>Town</h5>
+            <table class="table table-sm">
+                <tr id="members-row"><td class="fitwidth">Members</td><td><span id="label-members-pts">X</span></td class="fitwidth"><td><span id="label-members-inc">X</span>/sec</td></tr>
+            </table>
+            <div class="d-grid gap-2">
+                <button id="recruit-btn" class="btn btn-secondary" type="button" onclick="doAction('recruit');">RECRUIT<br><small id="members-cost">X</small></button>
+            </div>
+        </div>
+        <!--/TOWN-->
 
         <!--CULT-->
         <div class="block block-cult bg-light p-2 m-2 rounded" style="display: none;">
@@ -84,18 +96,6 @@
             </div>
         </div>
         <!--/FOREST-->
-
-        <!--TOWN-->
-        <div class="block block-town bg-light p-2 m-2 rounded" style="display: none;">
-            <h5>Town</h5>
-            <table class="table table-sm">
-                <tr><td class="fitwidth">Houses</td><td><span id="label-houses-pts">X</span></td><td class="fitwidth"><span id="label-houses-inc">X</span>/sec</td></tr>
-            </table>
-            <div class="d-grid gap-2">
-                <button class="btn btn-secondary" type="button" onclick="buyLand();">BUY HOUSE<br><small>(-<span id="label-house-cost">X</span> Money) (+2 Members)</small></button>
-            </div>
-        </div>
-        <!--/TOWN-->
 
         <!--HELP-->
         <div class="block block-help bg-light p-2 m-2 rounded" style="display: none;">

@@ -1,14 +1,4 @@
 /**
- * Recalculate and Refresh for the interval
- */
-function updateGame() {
-    updatePoints();
-    updateLabels();
-    runEvents();
-    localStorage.setItem('gameStats', JSON.stringify(gameStats));
-}
-
-/**
  * Load saved game stats and start interval
  */
 $(document).ready(function() {
@@ -22,42 +12,13 @@ $(document).ready(function() {
 });
 
 /**
- * Reset saved game stats
+ * Recalculate and Refresh for the interval
  */
-function resetGame() {
-    clearInterval(window.intervalID);
-    localStorage.setItem('gameStats', null);
-    location.reload();
-}
-
-/**
- * Refresh the values of all the stats labels
- */
-function updateLabels() {
-
-     // time indicator
-    $('#days-view').text(formatDays(gameStats.time.points));
-
-    Object.keys(gameStats).forEach(stat => {
-
-        // table of values
-        $('#label-'+stat+'-pts').text(gameStats[stat].points);
-        $('#label-'+stat+'-inc').text(gameStats[stat].increment);
-
-        // costs in buttons
-        if(gameStats[stat].cost != undefined){
-
-            var costText = '';
-
-            for (var costIndex in gameStats[stat].cost) {
-                var cost = gameStats[stat].cost[costIndex];
-                costText = costText + ' -' + cost.amount + ' ' + cost.stat;
-            }
-
-            $('#'+stat+'-cost').text(costText);
-        }
-
-    });
+function updateGame() {
+    updatePoints();
+    updateLabels();
+    runEvents();
+    localStorage.setItem('gameStats', JSON.stringify(gameStats));
 }
 
 /**
@@ -70,6 +31,36 @@ function updatePoints() {
         }
 
     });
+}
+
+/**
+ * Refresh the values of all the stats labels
+ */
+function updateLabels() {
+
+    // time indicator
+   $('#days-view').text(formatDays(gameStats.time.points));
+
+   Object.keys(gameStats).forEach(stat => {
+
+       // table of values
+       $('#label-'+stat+'-pts').text(gameStats[stat].points);
+       $('#label-'+stat+'-inc').text(gameStats[stat].increment);
+
+       // costs in buttons
+       if(gameStats[stat].cost != undefined){
+
+           var costText = '';
+
+           for (var costIndex in gameStats[stat].cost) {
+               var cost = gameStats[stat].cost[costIndex];
+               costText = costText + ' -' + cost.amount + ' ' + cost.stat;
+           }
+
+           $('#'+stat+'-cost').text(costText);
+       }
+
+   });
 }
 
 /**
@@ -108,6 +99,15 @@ function runEvents() {
 }
 
 /**
+ * Reset saved game stats
+ */
+function resetGame() {
+    clearInterval(window.intervalID);
+    localStorage.setItem('gameStats', null);
+    location.reload();
+}
+
+/**
  * Add new message log
  */
 function addLog(message, type) {
@@ -139,6 +139,9 @@ function doAction(action) {
         case 'write':
             buyStat('grimoires', 1);
             break;
+        case 'recruit':
+            buyStat('members', 1);
+            break;
     }
 
     updateLabels();
@@ -164,6 +167,8 @@ function buyStat(stat, qty) {
         for (var costIndex in gameStats[stat].cost) {
             var cost = gameStats[stat].cost[costIndex];
             consumeStat(cost.stat, cost.amount);
+            // Increment modifier of the cost
+            gameStats[stat].cost[costIndex].amount = Math.round(gameStats[stat].cost[costIndex].amount * gameStats[stat].cost[costIndex].modifier);
         }
     }
 

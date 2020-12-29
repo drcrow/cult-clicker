@@ -41,16 +41,17 @@ var gameStats = {
     "members": {
         "points": 0,
         "increment": 0,
-        "cost": {   // Cost of buying this stat
+        "cost": [{
             "stat": "fait",
             "amount": 10,
             "modifier": 1.1
-        },
-        "product": {    // Product of buying this stat
-            "stat": "fait", // Stat modified
-            "amount": 1 // Amount added to the increment of the modified stat
-        }
+        }],
+        "product": [{
+            "stat": "fait",
+            "amount": 1
+        }]
     },
+
     "money": {
         "points": 0,
         "increment": 0,
