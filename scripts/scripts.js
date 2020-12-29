@@ -1,15 +1,17 @@
-
-
-// Recalculate and Refresh for the interval
-function updateGame(){
+/**
+ * Recalculate and Refresh for the interval
+ */
+function updateGame() {
     updatePoints();
     updateLabels();
-    updateEvents();
+    runEvents();
     localStorage.setItem('gameStats', JSON.stringify(gameStats));
 }
 
-// Load saved game stats and start interval
-$(document).ready(function(){
+/**
+ * Load saved game stats and start interval
+ */
+$(document).ready(function() {
     var savedGameStats = JSON.parse(localStorage.getItem('gameStats'));
     if(savedGameStats != null){
         gameStats = savedGameStats;
@@ -19,16 +21,19 @@ $(document).ready(function(){
     window.intervalID = window.setInterval(updateGame, 1000);
 });
 
-// Reset saved game stats
-function resetGame(){
+/**
+ * Reset saved game stats
+ */
+function resetGame() {
     clearInterval(window.intervalID);
     localStorage.setItem('gameStats', null);
-    localStorage.setItem('days', null);
     location.reload();
 }
 
-// Refresh the values of all the stats labels
-function updateLabels(){
+/**
+ * Refresh the values of all the stats labels
+ */
+function updateLabels() {
 
      // time indicator
     $('#days-view').text(formatDays(gameStats.time.points));
@@ -49,8 +54,10 @@ function updateLabels(){
     });
 }
 
-// Apply the autoincrement for stats points
-function updatePoints(){
+/**
+ * Apply the autoincrement for stats points
+ */
+function updatePoints() {
     Object.keys(gameStats).forEach(stat => {
         if(gameStats[stat].increment != 0){
             gameStats[stat].points = gameStats[stat].points + gameStats[stat].increment;
@@ -59,8 +66,10 @@ function updatePoints(){
     });
 }
 
-// Ejecute all the events if the conditions are ok
-function updateEvents(){
+/**
+ * Ejecute all the events if the conditions are ok
+ */
+function runEvents() {
     Object.keys(gameEvents).forEach(event => {
         if(gameEvents[event].done == 0){ // Only process events not done
             var canBeDone = true;
@@ -92,7 +101,10 @@ function updateEvents(){
     });
 }
 
-function addLog(message, type){
+/**
+ * Add new message log
+ */
+function addLog(message, type) {
     switch(type){
         case 'success':
             $('.log').prepend('<small class="log-success">&raquo; '+message+'</small>');
@@ -103,20 +115,6 @@ function addLog(message, type){
         default:
             $('.log').prepend('<small>&raquo; '+message+'</small>');
             break;
-    }
-}
-
-// Update the Increment of a Stat when it is purchased (+) or used (-)
-function updateIncrement(stat, qty, purchased){
-    if(gameStats[stat].product != undefined){
-        var productStat = gameStats[stat].product.stat;
-        var productAmount = gameStats[stat].product.amount;
-
-        if(purchased){ // purchased (+)
-            gameStats[productStat].increment = gameStats[productStat].increment + (qty * productAmount);
-        }else{  // used (-)
-            gameStats[productStat].increment = gameStats[productStat].increment - (qty * productAmount);
-        }
     }
 }
 
@@ -190,34 +188,10 @@ function consumeStat(stat, qty) {
     }
 }
 
-// Check if a stat's cost can be paid
-function checkCost(stat){
-    var costStat = gameStats[stat].cost.stat;
-    var costAmount = gameStats[stat].cost.amount;
-
-    if(gameStats[costStat].points >= costAmount){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-// Pay stat's cost
-function spendCost(stat){
-    var costStat = gameStats[stat].cost.stat;
-    var costAmount = gameStats[stat].cost.amount;
-    var newCostAmount = Math.round(gameStats[stat].cost.amount * gameStats[stat].cost.modifier);
-
-    updateIncrement(costStat, costAmount, false);
-
-    gameStats[costStat].points = gameStats[costStat].points - costAmount;
-    gameStats[stat].cost.amount = newCostAmount;
-}
-
 /**
  * Show/Hide content blocks (from the menu)
  */
-function showBlock(block){
+function showBlock(block) {
 
     // Hide all block and show the selected one
     $('.collapse').collapse('hide');
