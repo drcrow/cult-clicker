@@ -21,6 +21,14 @@ body {
     font-size: .8rem;
 }
 
+.bg_home {
+    background: url('images/bg_home.jpg') top no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .bg_cult {
     background: url('images/bg_cult.jpg') top no-repeat;
     -webkit-background-size: cover;

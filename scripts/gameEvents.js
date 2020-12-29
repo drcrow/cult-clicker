@@ -1,15 +1,29 @@
 var gameEvents = {
-    "game-start": {
+
+    "game-start-1": {
         "done": 0,
         "conditions":[{
-            "stat": "fait",
+            "stat": "time",
             "amount": 0
         }],
         "results": [{
             "type": "log",
-            "message": "Your God needs your faith to become stronger and stronger. Show him that you are worthy of existing."
+            "message": "Welcome to Cult Clicker. Start in the dark isolation of your home and grow your power building an ominous cult to help your ancient god to raise again."
         }]
     },
+
+    "game-start-2": {
+        "done": 0,
+        "conditions":[{
+            "stat": "time",
+            "amount": 5
+        }],
+        "results": [{
+            "type": "log",
+            "message": "With pray and study you will gain fait and knowledge."
+        }]
+    },
+
     "is-praying": {
         "done": 0,
         "conditions":[{
@@ -18,28 +32,58 @@ var gameEvents = {
         }],
         "results": [{
             "type": "log",
-            "message": "Dont stop!!."
+            "message": "Keep praying!!."
         }]
     },
-    "ready-for-first-member": {
+
+    "is-studying": {
+        "done": 0,
+        "conditions":[{
+            "stat": "knowledge",
+            "amount": 5
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Keep studying!!."
+        }]
+    },
+
+    "ready-for-write": {
         "done": 0,
         "conditions":[{
             "stat": "fait",
             "amount": 10
+        },{
+            "stat": "knowledge",
+            "amount": 10
         }],
         "results": [{
             "type": "log",
-            "message": "Is time to recruit new members."
-        },
-        {
+            "message": "Leave a written record of what grows in your mind and soul."
+        },{
             "type": "display",
-            "object": "#members-row"
-        },
-        {
+            "object": "#grimoires-row"
+        },{
             "type": "display",
-            "object": "#recruit-btn"
+            "object": "#write-btn"
         }]
     },
+
+    "first-grimoires": {
+        "done": 0,
+        "conditions":[{
+            "stat": "grimoires",
+            "amount": 1
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Your grimoires will help you grow your magic power."
+        },{
+            "type": "display",
+            "object": "#magic-row"
+        }]
+    },
+
     "first-member": {
         "done": 0,
         "conditions":[{

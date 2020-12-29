@@ -16,18 +16,19 @@
 
     <title>Cult Clicker</title>
 </head>
-<body class="bg_cult">
+<body class="bg_home">
 
     <div id="section-top">
         <!--NAVBAR-->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Cult Clicker v0.1</a><small id="days-view">0</small>
+                <a class="navbar-brand" href="#">Cult Clicker v0.2</a><small id="days-view">0</small>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li id="home-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('home')">Home</a></li>
                         <li id="cult-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">Cult</a></li>
                         <li id="forest-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">Forest</a></li>
                         <li id="town-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">Town</a></li>
@@ -38,8 +39,25 @@
         </nav>
         <!--/NAVBAR-->
 
+        <!--HOME-->
+        <div class="block block-home bg-light p-2 m-2 rounded">
+            <h5>Home</h5>
+            <table class="table table-sm">
+                <tr id="magic-row" style="display: none;"><td class="fitwidth">Magic</td><td><span id="label-magic-pts">X</span></td><td class="fitwidth"><span id="label-magic-inc">X</span>/sec</td></tr>
+                <tr id="fait-row"><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>
+                <tr id="knowledge-row"><td class="fitwidth">Knowledge</td><td><span id="label-knowledge-pts">X</span></td><td class="fitwidth"><span id="label-knowledge-inc">X</span>/sec</td></tr>
+                <tr id="grimoires-row" style="display: none;"><td class="fitwidth">Grimoires</td><td><span id="label-grimoires-pts">X</span></td><td class="fitwidth"><span id="label-grimoires-inc">X</span>/sec</td></tr>
+            </table>
+            <div class="d-grid gap-2">
+                <button id="pray-btn" class="btn btn-sm btn-secondary" type="button" onclick="doAction('pray');">PRAY<br><small>He needs your prayers!!</small></button>
+                <button id="pray-btn" class="btn btn-sm btn-secondary" type="button" onclick="doAction('study');">STUDY<br><small>Knowledge is power!!</small></button>
+                <button id="write-btn" style="display: none;" class="btn btn-sm btn-secondary" type="button" onclick="doAction('write');">WRITE<br><small id="pages-cost">X</small></button>
+            </div>
+        </div>
+        <!--/HOME-->
+
         <!--CULT-->
-        <div class="block block-cult bg-light p-2 m-2 rounded">
+        <div class="block block-cult bg-light p-2 m-2 rounded" style="display: none;">
             <h5>Cult</h5>
             <table class="table table-sm">
                 <tr id="fait-row"><td class="fitwidth">Fait</td><td><span id="label-fait-pts">X</span></td><td class="fitwidth"><span id="label-fait-inc">X</span>/sec</td></tr>

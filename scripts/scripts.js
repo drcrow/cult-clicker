@@ -2,26 +2,17 @@
 
 // Recalculate and Refresh for the interval
 function updateGame(){
-    window.days++;
-    $('#days-view').text(formatDays(days));
-    localStorage.setItem('days', days);
-
     updatePoints();
     updateLabels();
     updateEvents();
     localStorage.setItem('gameStats', JSON.stringify(gameStats));
 }
 
-// Load saved game stats
+// Load saved game stats and start interval
 $(document).ready(function(){
     var savedGameStats = JSON.parse(localStorage.getItem('gameStats'));
     if(savedGameStats != null){
         gameStats = savedGameStats;
-    }
-
-    window.days = localStorage.getItem('days');
-    if(isNaN(window.days)){
-        window.days = 0;
     }
 
     // Interval (cicle of the game) Each cicle is a day
@@ -38,17 +29,21 @@ function resetGame(){
 
 // Refresh the values of all the stats labels
 function updateLabels(){
+
+     // time indicator
+    $('#days-view').text(formatDays(gameStats.time.points));
+
     Object.keys(gameStats).forEach(stat => {
+
+        // table of values
         $('#label-'+stat+'-pts').text(gameStats[stat].points);
         $('#label-'+stat+'-inc').text(gameStats[stat].increment);
 
+        // costs in buttons
         if(gameStats[stat].cost != undefined){
+
             $('#label-'+stat+'-cost').text(gameStats[stat].cost.amount);
             $('#label-'+stat+'-cost-stat').text(gameStats[stat].cost.stat);
-        }
-
-        if(gameStats[stat].product != undefined){
-            $('#label-'+stat+'-product').text(gameStats[stat].product.amount);
         }
 
     });
@@ -97,8 +92,18 @@ function updateEvents(){
     });
 }
 
-function addLog(message){
-    $('.log').prepend('<small>'+message+'</small>');
+function addLog(message, type){
+    switch(type){
+        case 'success':
+            $('.log').prepend('<small class="log-success">&raquo; '+message+'</small>');
+            break;
+        case 'danger':
+            $('.log').prepend('<small class="log-danger">&raquo; '+message+'</small>');
+            break;
+        default:
+            $('.log').prepend('<small>&raquo; '+message+'</small>');
+            break;
+    }
 }
 
 // Update the Increment of a Stat when it is purchased (+) or used (-)
@@ -115,34 +120,73 @@ function updateIncrement(stat, qty, purchased){
     }
 }
 
-function pray(){
-    gameStats.fait.points = gameStats.fait.points + 1;
+/**
+ * Execute an action from one button (in generl, to gain some stat)
+ */
+function doAction(action) {
+    switch(action){
+        case 'pray':
+            buyStat('fait', 1);
+            //consumeStat(stat, qty);
+            break;
+        case 'study':
+            buyStat('knowledge', 1);
+            break;
+        case 'write':
+            buyStat('grimoires', 1);
+            break;
+    }
+
     updateLabels();
 }
 
-function recruit(){
-    if(checkCost('members')){
-        spendCost('members');
-        updateIncrement('members', 1, true);
-        gameStats.members.points = gameStats.members.points + 1;
-        updateLabels();
+/**
+ * Increment the points of a stat (in general by click an action button)
+ */
+function buyStat(stat, qty) {
+    // 1: Check costs
+    if(gameStats[stat].cost != undefined){
+        for (var costIndex in gameStats[stat].cost) {
+            var cost = gameStats[stat].cost[costIndex];
+            if(gameStats[cost.stat].points < (cost.amount * qty)){
+                addLog('Not enough '+cost.stat, 'danger');
+                return false;
+            }
+        }
+    }
+
+    // 2: Pay costs
+    if(gameStats[stat].cost != undefined){
+        for (var costIndex in gameStats[stat].cost) {
+            var cost = gameStats[stat].cost[costIndex];
+            consumeStat(cost.stat, cost.amount);
+        }
+    }
+
+    // 3: Add qty to the Stat
+    gameStats[stat].points = gameStats[stat].points + qty;
+
+    // 4: If the stat has some "product", update the product's increments
+    if(gameStats[stat].product != undefined){
+        for (var productIndex in gameStats[stat].product) {
+            var product = gameStats[stat].product[productIndex];
+            gameStats[product.stat].increment = gameStats[product.stat].increment + (qty * product.amount);
+        }
     }
 }
 
-function collect(){
-    if(checkCost('money')){
-        spendCost('money');
-        gameStats.money.points = gameStats.money.points + 10;
-        updateLabels();
-    }
-}
+/**
+ * Decrement the points of a stat (in general consumed by an action)
+ * If the stat has a "product" (autoincrement other stat) this autoincrement must be modified
+ */
+function consumeStat(stat, qty) {
+    gameStats[stat].points = gameStats[stat].points - qty;
 
-function takeLand(){
-    if(checkCost('land')){
-        spendCost('land');
-        updateIncrement('land', 1, true);
-        gameStats.land.points = gameStats.land.points + 1;
-        updateLabels();
+    if(gameStats[stat].product != undefined){
+        for (var productIndex in gameStats[stat].product) {
+            var product = gameStats[stat].product[productIndex];
+            gameStats[product.stat].increment = gameStats[product.stat].increment - (qty * product.amount);
+        }
     }
 }
 
@@ -170,7 +214,9 @@ function spendCost(stat){
     gameStats[stat].cost.amount = newCostAmount;
 }
 
-// Show/Hide content blocks (from the menu)
+/**
+ * Show/Hide content blocks (from the menu)
+ */
 function showBlock(block){
 
     // Hide all block and show the selected one
@@ -179,24 +225,21 @@ function showBlock(block){
     $('.block-'+block).show();
 
     // Remove background and add the one of the selected block
-    $('body').removeClass('bg_cult bg_forest bg_town bg_help');
+    $('body').removeClass('bg_home bg_cult bg_forest bg_town bg_help');
     $('body').addClass('bg_'+block);
 }
 
-// Format days (cicles)
+/**
+ * Format days (cicles) this whas stolen from stackoverflow
+ */
 function formatDays (diff) {
-    // The string we're working with to create the representation
+
     var str = '';
-    // Map lengths of `diff` to different time periods
     var values = [['y', 365], ['m', 30], ['d', 1]];
-    // Iterate over the values...
     for (var i=0;i<values.length;i++) {
       var amount = Math.floor(diff / values[i][1]);
-      // ... and find the largest time value that fits into the diff
       if (amount >= 1) {
-         // If we match, add to the string ('s' is for pluralization)
          str += amount + values[i][0] + (amount > 1 ? 's' : '') + ' ';
-         // and subtract from the diff
          diff -= amount * values[i][1];
       }
     }
