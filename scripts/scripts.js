@@ -190,7 +190,6 @@ function buyStat(stat, qty) {
  */
 function consumeStat(stat, qty) {
     gameStats[stat].points = gameStats[stat].points - qty;
-
     if(gameStats[stat].product != undefined){
         for (var productIndex in gameStats[stat].product) {
             var product = gameStats[stat].product[productIndex];
@@ -203,7 +202,6 @@ function consumeStat(stat, qty) {
  * Show/Hide content blocks (from the menu)
  */
 function showBlock(block) {
-
     // Hide all block and show the selected one
     $('.collapse').collapse('hide');
     $('.block').hide();
@@ -218,7 +216,6 @@ function showBlock(block) {
  * Format days (cicles) this whas stolen from stackoverflow
  */
 function formatDays (diff) {
-
     var str = '';
     var values = [['y', 365], ['m', 30], ['d', 1]];
     for (var i=0;i<values.length;i++) {
