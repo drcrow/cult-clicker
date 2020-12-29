@@ -47,8 +47,14 @@ function updateLabels() {
         // costs in buttons
         if(gameStats[stat].cost != undefined){
 
-            $('#label-'+stat+'-cost').text(gameStats[stat].cost.amount);
-            $('#label-'+stat+'-cost-stat').text(gameStats[stat].cost.stat);
+            var costText = '';
+
+            for (var costIndex in gameStats[stat].cost) {
+                var cost = gameStats[stat].cost[costIndex];
+                costText = costText + ' -' + cost.amount + ' ' + cost.stat;
+            }
+
+            $('#'+stat+'-cost').text(costText);
         }
 
     });
