@@ -84,6 +84,25 @@ var gameEvents = {
         }]
     },
 
+    "new-area-town": {
+        "done": 0,
+        "conditions":[{
+            "stat": "fait",
+            "amount": 50
+        },{
+            "stat": "knowledge",
+            "amount": 50
+        }],
+        "results": [{
+            "type": "log",
+            "logtype": "success",
+            "message": "New area accesible: Town."
+        },{
+            "type": "display",
+            "object": "#town-menu"
+        }]
+    },
+
     "first-member": {
         "done": 0,
         "conditions":[{

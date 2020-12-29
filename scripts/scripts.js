@@ -86,7 +86,7 @@ function runEvents() {
                     var result = gameEvents[event].results[resultIndex];
                     switch (result.type) {
                         case "log":
-                            addLog(result.message);
+                            addLog(result.message, result.logtype);
                             break;
                         case "display":
                             $(result.object).show();
@@ -107,13 +107,13 @@ function runEvents() {
 function addLog(message, type) {
     switch(type){
         case 'success':
-            $('.log').prepend('<small class="log-success">&raquo; '+message+'</small>');
+            $('.log').prepend('<small class="log-success">&ofcir; '+message+'</small>');
             break;
         case 'danger':
-            $('.log').prepend('<small class="log-danger">&raquo; '+message+'</small>');
+            $('.log').prepend('<small class="log-danger">&ofcir; '+message+'</small>');
             break;
         default:
-            $('.log').prepend('<small>&raquo; '+message+'</small>');
+            $('.log').prepend('<small>&ofcir; '+message+'</small>');
             break;
     }
 }
