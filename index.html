@@ -28,28 +28,29 @@
 </head>
 <body class="bg_home">
 
-    <!--NAVBAR-->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Cult Clicker v0.2</a><small id="days-view">0</small>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li id="home-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('home')">&ominus; Home</a></li>
-                    <li id="town-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">&ocir; Town</a></li>
-                    <li id="cult-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">&oast; Cult</a></li>
-                    <li id="forest-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">&otimes; Forest</a></li>
-                    <li id="help-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!--/NAVBAR-->
-
     <div id="sections-container">
         <div id="section-top">
+
+            <!--NAVBAR-->
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Cult Clicker v0.2</a><small id="days-view">0</small>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li id="home-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('home')">&ominus; Home</a></li>
+                            <li id="town-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">&ocir; Town</a></li>
+                            <li id="cult-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">&oast; Cult</a></li>
+                            <li id="forest-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">&otimes; Forest</a></li>
+                            <li id="help-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('help')">About / Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--/NAVBAR-->
+
             <!--HOME-->
             <div class="block block-home bg-light p-2 m-2 rounded">
                 <h5>Home</h5>
@@ -160,7 +161,7 @@
             <!--/LOG-->
         </div>
     </div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--GAME-->
