@@ -13,8 +13,12 @@ body {
     white-space: nowrap;
 }
 
-.btn-secondary {
-    background-color: #6c757d99 !important;
+.btn-primary {
+    background-color: #0d6efd99 !important;
+}
+
+.btn-danger {
+    background-color: #dc354599 !important;
 }
 
 #paypal-form {
