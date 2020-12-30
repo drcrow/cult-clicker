@@ -18,12 +18,22 @@ body {
     margin: 20px;
 }
 
-#section-top {
+#sections-container {
     font-size: .8rem;
+    flex: 1;
+     height: 100%;
 }
 
-#section-bottom {
-    font-size: .8rem;
+#sections-container #section-top {
+    display: flex;
+     height: 60vh;
+     border: 1px solid red;
+}
+
+#sections-container #section-bottom {
+    display: flex;
+     height: 40vh;
+     border: 1px solid green;
 }
 
 .bg_home {
@@ -68,6 +78,8 @@ body {
 
 .block {
     background: rgba(70, 70, 70, .8) !important;
+    width: 100%;
+    overflow-y: scroll;
 }
 
 .block h1 {
@@ -94,10 +106,7 @@ body {
 .log {
     overflow-y: scroll;
     background: rgba(70, 70, 70, .8) !important;
-
-    position: absolute;
-    bottom: 0;
-    height: 35%;
+    width: 100%;
 }
 
 .log small {
