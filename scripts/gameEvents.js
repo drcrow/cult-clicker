@@ -12,18 +12,6 @@ var gameEvents = {
         }]
     },
 
-    "game-start-2": {
-        "done": 0,
-        "conditions":[{
-            "resource": "time",
-            "amount": 5
-        }],
-        "results": [{
-            "type": "log",
-            "message": "With pray and study you will gain fait and knowledge."
-        }]
-    },
-
     "is-praying": {
         "done": 0,
         "conditions":[{
@@ -58,14 +46,11 @@ var gameEvents = {
             "amount": 10
         }],
         "results": [{
-            "type": "log",
-            "message": "Leave a written record of what grows in your mind and soul."
+            "type": "display",
+            "element": "resourceGrimoires"
         },{
-            "type": "display-resource",
-            "element": "#grimoires-row"
-        },{
-            "type": "display-action",
-            "element": "#write-btn"
+            "type": "display",
+            "element": "actionWrite"
         }]
     },
 
@@ -76,11 +61,8 @@ var gameEvents = {
             "amount": 1
         }],
         "results": [{
-            "type": "log",
-            "message": "Your grimoires will help you grow your magic power."
-        },{
-            "type": "display-resource",
-            "element": "#magic-row"
+            "type": "display",
+            "element": "resourceMagic"
         }]
     },
 
@@ -94,12 +76,20 @@ var gameEvents = {
             "amount": 50
         }],
         "results": [{
+            "type": "display",
+            "element": "areaTown"
+        }]
+    },
+
+    "first-year": {
+        "done": 0,
+        "conditions":[{
+            "resource": "time",
+            "amount": 365
+        }],
+        "results": [{
             "type": "log",
-            "logtype": "success",
-            "message": "New area accesible: Town."
-        },{
-            "type": "display-area",
-            "element": "#town-menu"
+            "message": "You have reached your first year in the search for ultimate enlightenment!!!"
         }]
     },
 
@@ -121,12 +111,8 @@ var gameEvents = {
             "amount": 10
         }],
         "results": [{
-            "type": "log",
-            "message": "Explore the nearby forest and make sacrifices to bless the land."
-        },
-        {
-            "type": "display-area",
-            "element": "#forest-menu"
+            "type": "display",
+            "element": "areaForest"
         }]
     }
 };

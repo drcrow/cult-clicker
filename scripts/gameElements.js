@@ -57,7 +57,7 @@ var gameElements = {
         "label":    "Grimoires",
         "selector": "#grimoires-row",
         "visible":  false,
-        "message":  ""
+        "message":  "Your grimoires will help you grow your magic power."
     },
 
     "resourceMagic": {
@@ -73,7 +73,7 @@ var gameElements = {
         "label":    "Members",
         "selector": "#members-row",
         "visible":  true,
-        "message":  ""
+        "message":  "Each new member will pray with you and make your fait grow."
     },
     // ACTIONS
     "actionPray": {
@@ -97,7 +97,7 @@ var gameElements = {
         "label":    "WRITE",
         "selector": "#write-btn",
         "visible":  false,
-        "message":  ""
+        "message":  "Leave a record of what grows in your mind and soul."
     },
 
     "actionRecruit": {

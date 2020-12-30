@@ -2,14 +2,52 @@
  * Load saved game resources and start interval
  */
 $(document).ready(function() {
+    // Load gameResources from localStorage
     var savedGameResources = JSON.parse(localStorage.getItem('gameResources'));
     if(savedGameResources != null){
         gameResources = savedGameResources;
     }
 
+    // Load gameElements from localStorage
+    var savedGameElements = JSON.parse(localStorage.getItem('gameElements'));
+    if(savedGameElements != null){
+        gameElements = savedGameElements;
+    }
+
+    // Show visible gameElements
+    for (var elementIndex in gameElements) {
+        var element = gameElements[elementIndex];
+        if(element.visible == true){
+            showElement(elementIndex, false);
+        }
+        //console.log(element);
+    }
+
     // Interval (cicle of the game) Each cicle is a day
     window.intervalID = window.setInterval(updateGame, 1000);
 });
+
+/**
+ * Shows and elemente of the interface (area (menu item), resource (table row), action (button))
+ */
+function showElement(elementIndex, showMessage) {
+    $(gameElements[elementIndex].selector).show();
+    gameElements[elementIndex].visible = true;
+    if(showMessage == true) {
+        switch(gameElements[elementIndex].type){
+            case 'area':
+                addLog('New area available: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
+                break;
+            case 'resource':
+                addLog('New resource: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
+                break;
+            case 'action':
+                addLog('New action: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
+                break;
+        }
+    }
+
+}
 
 /**
  * Recalculate and Refresh for the interval
@@ -19,6 +57,7 @@ function updateGame() {
     updateLabels();
     runEvents();
     localStorage.setItem('gameResources', JSON.stringify(gameResources));
+    localStorage.setItem('gameElements', JSON.stringify(gameElements));
 }
 
 /**
@@ -83,10 +122,10 @@ function runEvents() {
                     var result = gameEvents[event].results[resultIndex];
                     switch (result.type) {
                         case "log":
-                            addLog(result.message, result.logtype);
+                            addLog(result.message, 'gray');
                             break;
                         case "display":
-                            $(result.object).show();
+                            showElement(result.element, true);
                             break;
                         case "activate-area":
                             activateElement('area', result.element, true);
@@ -107,24 +146,15 @@ function runEvents() {
 function resetGame() {
     clearInterval(window.intervalID);
     localStorage.setItem('gameResources', null);
+    localStorage.setItem('gameElements', null);
     location.reload();
 }
 
 /**
  * Add new message log
  */
-function addLog(message, type) {
-    switch(type){
-        case 'success':
-            $('.log').prepend('<small class="log-success">&ofcir; '+message+'</small>');
-            break;
-        case 'danger':
-            $('.log').prepend('<small class="log-danger">&ofcir; '+message+'</small>');
-            break;
-        default:
-            $('.log').prepend('<small>&ofcir; '+message+'</small>');
-            break;
-    }
+function addLog(message, color) {
+    $('.log').prepend('<small class="log-' + color + '">&ofcir; ' + message + '</small>');
 }
 
 /**
@@ -159,7 +189,7 @@ function buyResource(resource, qty) {
         for (var costIndex in gameResources[resource].cost) {
             var cost = gameResources[resource].cost[costIndex];
             if(gameResources[cost.resource].points < (cost.amount * qty)){
-                addLog('Not enough '+cost.resource, 'danger');
+                addLog('Not enough '+cost.resource, 'red');
                 return false;
             }
         }

@@ -105,10 +105,18 @@ body {
     display: block !important;
 }
 
-.log .log-danger {
-    color:red !important;
+.log .log-blue {
+    color:#a9a9ff !important;
 }
 
-.log .log-success {
-    color:green !important;
+.log .log-red {
+    color:#ffa9a9 !important;
+}
+
+.log .log-green {
+    color:#a9ffa9 !important;
+}
+
+.log .log-gray {
+    color:#a9a9a9 !important;
 }
