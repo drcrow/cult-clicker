@@ -13,6 +13,10 @@ body {
     white-space: nowrap;
 }
 
+.btn-secondary {
+    background-color: #6c757d99 !important;
+}
+
 #paypal-form {
     text-align: center;
     margin: 20px;
