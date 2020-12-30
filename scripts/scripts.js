@@ -6,12 +6,21 @@ $(document).ready(function() {
     var savedGameResources = JSON.parse(localStorage.getItem('gameResources'));
     if(savedGameResources != null){
         gameResources = savedGameResources;
+        console.log('Restored gameResources');
     }
 
     // Load gameElements from localStorage
     var savedGameElements = JSON.parse(localStorage.getItem('gameElements'));
     if(savedGameElements != null){
         gameElements = savedGameElements;
+        console.log('Restored gameElements');
+    }
+
+    // Load gameEvents from localStorage
+    var savedGameEvents = JSON.parse(localStorage.getItem('gameEvents'));
+    if(savedGameEvents != null){
+        gameEvents = savedGameEvents;
+        console.log('Restored gameEvents');
     }
 
     // Show visible gameElements
@@ -42,7 +51,7 @@ function showElement(elementIndex, showMessage) {
                 addLog('New resource: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
                 break;
             case 'action':
-                addLog('New action: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
+                addLog('Now you can: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
                 break;
         }
     }
@@ -58,6 +67,7 @@ function updateGame() {
     runEvents();
     localStorage.setItem('gameResources', JSON.stringify(gameResources));
     localStorage.setItem('gameElements', JSON.stringify(gameElements));
+    localStorage.setItem('gameEvents', JSON.stringify(gameEvents));
 }
 
 /**
@@ -147,6 +157,7 @@ function resetGame() {
     clearInterval(window.intervalID);
     localStorage.setItem('gameResources', null);
     localStorage.setItem('gameElements', null);
+    localStorage.setItem('gameEvents', null);
     location.reload();
 }
 
