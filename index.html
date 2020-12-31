@@ -26,7 +26,7 @@
 
     <title>Cult Clicker</title>
 </head>
-<body class="bg_home">
+<body class="bg_gods">
 
     <div id="sections-container">
         <div id="section-top">
@@ -40,7 +40,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                            <li id="home-menu" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('home')">&rtrif; Home</a></li>
+                            <li id="home-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('home')">&rtrif; Home</a></li>
                             <li id="town-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">&rtrif; Town</a></li>
                             <li id="cult-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">&rtrif; Cult</a></li>
                             <li id="forest-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('forest')">&rtrif; Forest</a></li>
@@ -52,8 +52,21 @@
             </nav>
             <!--/NAVBAR-->
 
+            <!--GOD-->
+            <div class="block block-gods bg-light p-2 m-2 rounded">
+                <h5>Select your God</h5>
+                <div class="d-grid gap-2">
+                    <button id="god1-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('pray');">CTHULHU<br><small>Master of R'lyeh</small></button>
+                    <button id="god2-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('study');">TSATHOGGUA<br><small>The Toad-God</small></button>
+                    <button id="god3-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('write');">YOG-SOTHOTH<br><small>The Beyond-One</small></button>
+                    <button id="god4-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('write');">NYARLATHOTEP<br><small>The Crawling Chaos</small></button>
+                    <button id="god5-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('write');">SHUB-NIGGURATH<br><small>The Black Goat of the Woods with a Thousand Young</small></button>
+                </div>
+            </div>
+            <!--/GOD-->
+
             <!--HOME-->
-            <div class="block block-home bg-light p-2 m-2 rounded">
+            <div class="block block-home bg-light p-2 m-2 rounded" style="display: none;">
                 <h5>Home</h5>
                 <table class="table table-sm">
                     <tr id="fait-row">

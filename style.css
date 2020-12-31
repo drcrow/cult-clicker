@@ -21,6 +21,10 @@ body {
     background-color: #dc354599 !important;
 }
 
+.btn-success {
+    background-color: #19875499 !important;
+}
+
 #paypal-form {
     text-align: center;
     margin: 20px;
@@ -41,6 +45,14 @@ body {
 #sections-container #section-bottom {
     display: flex;
      height: 40vh;
+}
+
+.bg_gods {
+    background: url('images/bg_gods.jpg') top no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .bg_home {

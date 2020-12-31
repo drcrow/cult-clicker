@@ -8,7 +8,7 @@ var gameElements = {
         "type":     "area",
         "label":    "Home",
         "selector": "#home-menu",
-        "visible":  true,
+        "visible":  false,
         "message":  "Surrounded by moldy and old books a spark of madness appears..."
     },
 
