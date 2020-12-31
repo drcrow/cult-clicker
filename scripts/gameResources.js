@@ -1,8 +1,14 @@
 var gameResources = {
 
-    "time": { // Time is only used to count the past of time
+    "time": {           // Time is only used to count the past of time
         "points": 0,    // Current points
         "increment": 1  // Automatic increment of points in each interval
+    },
+
+    "god": {            // god is not as the rest of resources, is used to save the selected god's name
+        "points": 0,
+        "increment": 0,
+        "value": ''     //God's name
     },
 
     "fait": {

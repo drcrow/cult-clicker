@@ -1,6 +1,6 @@
 var gameEvents = {
 
-    "game-start-1": {
+    "game-start": {
         "done": 0,
         "conditions":[{
             "resource": "time",
@@ -8,7 +8,19 @@ var gameEvents = {
         }],
         "results": [{
             "type": "log",
-            "message": "Welcome to Cult Clicker. Start in the dark isolation of your home and grow your power building an ominous cult to help your ancient god to raise again."
+            "message": "Welcome to Cult Clicker. First of all you need to select a God."
+        }]
+    },
+
+    "selected-god": {
+        "done": 0,
+        "conditions":[{
+            "resource": "god",
+            "amount": 1
+        }],
+        "results": [{
+            "type": "display",
+            "element": "areaHome"
         }]
     },
 
@@ -93,17 +105,6 @@ var gameEvents = {
         }]
     },
 
-    "first-member": {
-        "done": 0,
-        "conditions":[{
-            "resource": "members",
-            "amount": 1
-        }],
-        "results": [{
-            "type": "log",
-            "message": "Each new member will pray with you and make your fait grow."
-        }]
-    },
     "discover-forest": {
         "done": 0,
         "conditions":[{

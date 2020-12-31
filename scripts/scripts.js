@@ -32,6 +32,9 @@ $(document).ready(function() {
         //console.log(element);
     }
 
+    // Generate list of buttons for god selection
+    godsButtons();
+
     // Interval (cicle of the game) Each cicle is a day
     window.intervalID = window.setInterval(updateGame, 1000);
 });
@@ -259,7 +262,7 @@ function showBlock(block) {
 /**
  * Format days (cicles) this whas stolen from stackoverflow
  */
-function formatDays (diff) {
+function formatDays(diff) {
     var str = '';
     var values = [['y', 365], ['m', 30], ['d', 1]];
     for (var i=0;i<values.length;i++) {
@@ -271,3 +274,50 @@ function formatDays (diff) {
     }
     return str;
   }
+
+/**
+ * Gods list
+ */
+var godsList = {
+    "CTHULHU": {
+        "description": "Master of R'lyeh",
+        "phrase": "In his house at R'lyeh dead Cthulhu waits dreaming. Iä iä Cthulhu fhtagn!"
+    },
+    "TSATHOGGUA": {
+        "description": "The Toad-God",
+        "phrase": "In that secret cave in the bowels of Voormithadreth abides from eldermost eons the god Tsathoggua."
+    },
+    "YOG-SOTHOTH": {
+        "description": "The Beyond-One",
+        "phrase": "Yog-Sothoth knows the gate. Yog-Sothoth is the gate. Yog-Sothoth is the key and guardian of the gate. Past, present, future, all are one in Yog-Sothoth."
+    },
+    "NYARLATHOTEP": {
+        "description": "The Crawling Chaos",
+        "phrase": "To Nyarlathotep, Mighty Messenger, must all things be told. And he shall put on the semblance of man, the waxen mask and the robes that hide, and come down from the world of Seven Suns to mock."
+    },
+    "SHUB-NIGGURATH": {
+        "description": "Lord of the Wood",
+        "phrase": "Iä! Shub-Niggurath! The Black Goat of the Woods with a Thousand Young!"
+    }
+};
+
+/**
+ * Generte Gods buttons list
+ */
+function godsButtons() {
+    for (var godName in godsList) {
+        //console.log(godName);
+        $('#god-selection').append('<button class="btn btn-sm btn-success" type="button" onclick="selectGod(\'' + godName + '\');">' + godName + '<br><small>' + godsList[godName].description + '</small></button>');
+    }
+}
+
+/**
+ * Save selected god's name
+ */
+function selectGod(godName) {
+    gameResources.god.points = 1;
+    gameResources.god.value = godName;
+    addLog(godsList[godName].phrase, 'blue');
+    //showElement('areaHome', false);
+    showBlock('home');
+}

@@ -7,7 +7,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-TXYLY8C34T');
     </script>
 
@@ -55,12 +54,8 @@
             <!--GOD-->
             <div class="block block-gods bg-light p-2 m-2 rounded">
                 <h5>Select your God</h5>
-                <div class="d-grid gap-2">
-                    <button id="god1-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('pray');">CTHULHU<br><small>Master of R'lyeh</small></button>
-                    <button id="god2-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('study');">TSATHOGGUA<br><small>The Toad-God</small></button>
-                    <button id="god3-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('write');">YOG-SOTHOTH<br><small>The Beyond-One</small></button>
-                    <button id="god4-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('write');">NYARLATHOTEP<br><small>The Crawling Chaos</small></button>
-                    <button id="god5-btn" class="btn btn-sm btn-success" type="button" onclick="doAction('write');">SHUB-NIGGURATH<br><small>The Black Goat of the Woods with a Thousand Young</small></button>
+                <div id="god-selection" class="d-grid gap-2">
+                    <!--God are loaded here-->
                 </div>
             </div>
             <!--/GOD-->

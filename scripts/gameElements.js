@@ -65,7 +65,7 @@ var gameElements = {
         "label":    "Magic",
         "selector": "#magic-row",
         "visible":  false,
-        "message":  ""
+        "message":  "Magic will help you fulfill your sacred duty."
     },
 
     "resourceMembers": {
@@ -104,7 +104,7 @@ var gameElements = {
         "type":     "action",
         "label":    "RECRUIT",
         "selector": "#recruit-btn",
-        "visible":  true,
-        "message":  ""
+        "visible":  false,
+        "message":  "Each new member will pray with you and make your fait grow."
     },
 };
