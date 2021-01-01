@@ -25,6 +25,14 @@ body {
     background-color: #19875499 !important;
 }
 
+.btn-light {
+    background-color: #f8f9fa99 !important;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
 #paypal-form {
     text-align: center;
     margin: 20px;
