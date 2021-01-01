@@ -35,6 +35,11 @@ $(document).ready(function() {
     // Generate list of buttons for god selection
     godsButtons();
 
+    // If god is already selected, display Home
+    if(gameResources.god.points == 1) {
+        showBlock('home');
+    }
+
     // Interval (cicle of the game) Each cicle is a day
     window.intervalID = window.setInterval(updateGame, 1000);
 });
