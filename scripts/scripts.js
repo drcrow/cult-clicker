@@ -23,6 +23,11 @@ $(document).ready(function() {
         console.log('Restored gameEvents');
     }
 
+    // Generate list of buttons for god selection
+    godsButtons();
+    // Generate rows in Resources table
+    resourcesRows();
+
     // Show visible gameElements
     for (var elementIndex in gameElements) {
         var element = gameElements[elementIndex];
@@ -32,11 +37,6 @@ $(document).ready(function() {
         }
         //console.log(element);
     }
-
-    // Generate list of buttons for god selection
-    godsButtons();
-    // Generate rows in Resources table
-    resourcesRows();
 
     // If god is already selected, display Home
     if(gameResources.god.points == 1) {
@@ -346,6 +346,6 @@ function godsButtons() {
 function resourcesRows() {
     for (var resourceName in gameResources) {
         console.log(resourceName);
-        $('#resources-table').append('<tr id="'+resourceName+'-row" style="display: none;"><td class="fitwidth">'+resourceName+'</td><td><span id="label-'+resourceName+'-pts">X</span></td><td class="fitwidth"><span id="label-'+resourceName+'-inc">X</span>/sec</td></tr>');
+        $('#resources-table tbody').append('<tr id="'+resourceName+'-row" style="display: none;"><td class="fitwidth">'+resourceName+'</td><td><span id="label-'+resourceName+'-pts">X</span></td><td class="fitwidth"><span id="label-'+resourceName+'-inc">X</span>/sec</td></tr>');
     }
 }
