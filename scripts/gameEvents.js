@@ -21,6 +21,12 @@ var gameEvents = {
         "results": [{
             "type": "display",
             "element": "areaHome"
+        },{
+            "type": "display",
+            "element": "resourceFait"
+        },{
+            "type": "display",
+            "element": "resourceKnowledge"
         }]
     },
 

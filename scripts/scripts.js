@@ -26,6 +26,7 @@ $(document).ready(function() {
     // Show visible gameElements
     for (var elementIndex in gameElements) {
         var element = gameElements[elementIndex];
+        //console.log(elementIndex);
         if(element.visible == true){
             showElement(elementIndex, false);
         }
@@ -34,6 +35,8 @@ $(document).ready(function() {
 
     // Generate list of buttons for god selection
     godsButtons();
+    // Generate rows in Resources table
+    resourcesRows();
 
     // If god is already selected, display Home
     if(gameResources.god.points == 1) {
@@ -49,6 +52,7 @@ $(document).ready(function() {
  */
 function showElement(elementIndex, showMessage) {
     $(gameElements[elementIndex].selector).show();
+    console.log('SHOW '+gameElements[elementIndex].selector);
     gameElements[elementIndex].visible = true;
     if(showMessage == true) {
         switch(gameElements[elementIndex].type){
@@ -144,9 +148,6 @@ function runEvents() {
                             break;
                         case "display":
                             showElement(result.element, true);
-                            break;
-                        case "activate-area":
-                            activateElement('area', result.element, true);
                             break;
                         default:
                             break;
@@ -254,9 +255,21 @@ function consumeResource(resource, qty) {
  * Show/Hide content blocks (from the menu)
  */
 function showBlock(block) {
-    // Hide all block and show the selected one
+    // Hide menu
     $('.collapse').collapse('hide');
+
+    if(block == 'gods' || block == 'about') {
+        $('#section-top .col-12').show();
+        $('#section-top .col-6').hide();
+    }else{
+        $('#section-top .col-12').hide();
+        $('#section-top .col-6').show();
+    }
+
+
+    // Hide all blocks and show the selected one
     $('.block').hide();
+    $('.block-resources').show();
     $('.block-'+block).show();
 
     // Remove background and add the one of the selected block
@@ -307,6 +320,17 @@ var godsList = {
 };
 
 /**
+ * Save selected god's name
+ */
+function selectGod(godName) {
+    gameResources.god.points = 1;
+    gameResources.god.value = godName;
+    addLog(godsList[godName].phrase, 'blue');
+    //showElement('areaHome', false);
+    showBlock('home');
+}
+
+/**
  * Generte Gods buttons list
  */
 function godsButtons() {
@@ -317,12 +341,11 @@ function godsButtons() {
 }
 
 /**
- * Save selected god's name
+ * Generate Resources table rows
  */
-function selectGod(godName) {
-    gameResources.god.points = 1;
-    gameResources.god.value = godName;
-    addLog(godsList[godName].phrase, 'blue');
-    //showElement('areaHome', false);
-    showBlock('home');
+function resourcesRows() {
+    for (var resourceName in gameResources) {
+        console.log(resourceName);
+        $('#resources-table').append('<tr id="'+resourceName+'-row" style="display: none;"><td class="fitwidth">'+resourceName+'</td><td><span id="label-'+resourceName+'-pts">X</span></td><td class="fitwidth"><span id="label-'+resourceName+'-inc">X</span>/sec</td></tr>');
+    }
 }
