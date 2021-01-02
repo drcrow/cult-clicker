@@ -1,3 +1,7 @@
+* {
+    font-size: .8rem;
+}
+
 html {
     height: 100vh;
 }
@@ -36,12 +40,6 @@ body {
 #paypal-form {
     text-align: center;
     margin: 20px;
-}
-
-#sections-container {
-    font-size: .8rem;
-    flex: 1;
-     height: 100%;
 }
 
 #sections-container #section-top {
