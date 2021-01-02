@@ -12,8 +12,12 @@ body {
     background-color: black;
 }
 
+.navbar-brand {
+    color: #198754 !important;
+}
+
 #days-view {
-    color: #fff;
+    color: #ccc;
     white-space: nowrap;
 }
 
