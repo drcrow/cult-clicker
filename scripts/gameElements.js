@@ -72,7 +72,7 @@ var gameElements = {
         "type":     "resource",
         "label":    "Members",
         "selector": "#members-row",
-        "visible":  true,
+        "visible":  false,
         "message":  "Each new member will pray with you and make your fait grow."
     },
     // ACTIONS
@@ -105,6 +105,6 @@ var gameElements = {
         "label":    "RECRUIT",
         "selector": "#recruit-btn",
         "visible":  false,
-        "message":  "Each new member will pray with you and make your fait grow."
+        "message":  "Spread the word."
     },
 };

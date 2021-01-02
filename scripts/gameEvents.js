@@ -90,6 +90,12 @@ var gameEvents = {
         "results": [{
             "type": "display",
             "element": "areaTown"
+        },{
+            "type": "display",
+            "element": "resourceMembers"
+        },{
+            "type": "display",
+            "element": "actionRecruit"
         }]
     },
 
