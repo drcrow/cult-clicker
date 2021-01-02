@@ -4,12 +4,17 @@
 
 html {
     height: 100vh;
+    background-color: black;
 }
 
 body {
     font-family: 'Roboto Mono', monospace;
     height: 100vh;
     background-color: black;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .navbar-brand {
@@ -37,6 +42,14 @@ body {
 #days-view {
     color: #ccc;
     white-space: nowrap;
+}
+
+.table-container {
+    padding-right: 3px;
+}
+
+.areas-container {
+    padding-left: 3px;
 }
 
 .btn-action {
@@ -78,55 +91,35 @@ body {
 #sections-container #section-bottom {
     display: flex;
     height: 30vh;
-    padding: 1rem 0;
+    padding: 6px 0;
 }
 
 .bg_gods {
     background: url('images/bg_gods.jpg') top no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+}
+
+.bg_library {
+    background: url('images/bg_library.jpg') top no-repeat;
 }
 
 .bg_home {
     background: url('images/bg_home.jpg') top no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .bg_cult {
     background: url('images/bg_cult.jpg') top no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .bg_forest {
     background: url('images/bg_forest.webp') top no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .bg_town {
     background: url('images/bg_town.jpg') top no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .bg_help {
     background: url('images/bg_help.jpg') top no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .block {
@@ -155,6 +148,10 @@ body {
 .block table td.fitwidth {
     width: 1px;
     white-space: nowrap;
+}
+
+.block table td.resource-name {
+    text-transform: capitalize;
 }
 
 .log {

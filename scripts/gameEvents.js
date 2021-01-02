@@ -20,25 +20,10 @@ var gameEvents = {
         }],
         "results": [{
             "type": "display",
-            "element": "areaHome"
+            "element": "areaLibrary"
         },{
             "type": "display",
-            "element": "resourceFait"
-        },{
-            "type": "display",
-            "element": "resourceKnowledge"
-        }]
-    },
-
-    "is-praying": {
-        "done": 0,
-        "conditions":[{
-            "resource": "fait",
-            "amount": 5
-        }],
-        "results": [{
-            "type": "log",
-            "message": "Keep praying!!."
+            "element": "actionStudy"
         }]
     },
 

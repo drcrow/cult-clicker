@@ -38,9 +38,9 @@ $(document).ready(function() {
         //console.log(element);
     }
 
-    // If god is already selected, display Home
+    // If god is already selected, display Library
     if(gameResources.god.points == 1) {
-        showBlock('home');
+        showBlock('library');
     }
 
     // Interval (cicle of the game) Each cicle is a day
@@ -105,8 +105,8 @@ function updateLabels() {
    Object.keys(gameResources).forEach(resource => {
 
        // table of values
-       $('#label-'+resource+'-pts').text(gameResources[resource].points);
-       $('#label-'+resource+'-inc').text(gameResources[resource].increment);
+       $('#label-'+resource+'-pts').text(gameResources[resource].points.toFixed(2));
+       $('#label-'+resource+'-inc').text(gameResources[resource].increment.toFixed(2));
 
        // costs in buttons
        if(gameResources[resource].cost != undefined){
@@ -187,7 +187,7 @@ function doAction(action) {
             //consumeResource(resource, qty);
             break;
         case 'study':
-            buyResource('knowledge', 1);
+            buyResource('intelligence', 1);
             break;
         case 'write':
             buyResource('grimoires', 1);
@@ -221,7 +221,8 @@ function buyResource(resource, qty) {
             var cost = gameResources[resource].cost[costIndex];
             consumeResource(cost.resource, cost.amount);
             // Increment modifier of the cost
-            gameResources[resource].cost[costIndex].amount = Math.round(gameResources[resource].cost[costIndex].amount * gameResources[resource].cost[costIndex].modifier);
+            var amount = gameResources[resource].cost[costIndex].amount * gameResources[resource].cost[costIndex].modifier;
+            gameResources[resource].cost[costIndex].amount = amount.toFixed(2);
         }
     }
 
@@ -255,6 +256,7 @@ function consumeResource(resource, qty) {
  * Show/Hide content blocks (from the menu)
  */
 function showBlock(block) {
+    console.log('BLOCK '+block)
     // Hide menu
     $('.collapse').collapse('hide');
 
@@ -327,7 +329,7 @@ function selectGod(godName) {
     gameResources.god.value = godName;
     addLog(godsList[godName].phrase, 'blue');
     //showElement('areaHome', false);
-    showBlock('home');
+    showBlock('library');
 }
 
 /**
@@ -346,6 +348,6 @@ function godsButtons() {
 function resourcesRows() {
     for (var resourceName in gameResources) {
         console.log(resourceName);
-        $('#resources-table tbody').append('<tr id="'+resourceName+'-row" style="display: none;"><td class="fitwidth">'+resourceName+'</td><td><span id="label-'+resourceName+'-pts">X</span></td><td class="fitwidth"><span id="label-'+resourceName+'-inc">X</span>/sec</td></tr>');
+        $('#resources-table tbody').append('<tr id="'+resourceName+'-row" style="display: none;"><td class="resource-name fitwidth">'+resourceName+'</td><td><span id="label-'+resourceName+'-pts">X</span></td><td class="fitwidth"><span id="label-'+resourceName+'-inc">X</span>/s</td></tr>');
     }
 }

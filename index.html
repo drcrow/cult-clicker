@@ -36,6 +36,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li id="library-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('library')">&rtrif; Library</a></li>
                     <li id="home-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('home')">&rtrif; Home</a></li>
                     <li id="town-menu" style="display: none;" class="nav-item"><a class="nav-link" href="#" onclick="showBlock('town')">&rtrif; Town</a></li>
                     <li id="cult-menu" style="display: none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock('cult')">&rtrif; Cult</a></li>
@@ -80,7 +81,7 @@
             </div>
 
             <!--RESOURCES TABLE-->
-            <div class="col-6" style="display: none;">
+            <div class="col-6 table-container" style="display: none;">
                 <div class="block block-resources bg-light p-2 rounded" style="display: none;">
                     <table id="resources-table" class="table table-sm">
                         <tbody>
@@ -91,7 +92,13 @@
             </div>
             <!--/RESOURCES TABLE-->
 
-            <div class="col-6" style="display: none;">
+            <div class="col-6 areas-container" style="display: none;">
+                <!--LIBRARY-->
+                <div class="block block-library bg-light p-2 rounded" style="display: none;">
+                    <h5>Library</h5>
+                    <button id="study-btn" class="btn btn-sm btn-action btn-primary" type="button" onclick="doAction('study');">STUDY<br><small id="intelligence-cost">X</small></button>
+                </div>
+                <!--/LIBRARY-->
                 <!--HOME-->
                 <div class="block block-home bg-light p-2 rounded" style="display: none;">
                     <h5>Home</h5>

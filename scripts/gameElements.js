@@ -4,12 +4,20 @@
 
 var gameElements = {
     // AREAS
+    "areaLibrary": {
+        "type":     "area",
+        "label":    "Library",
+        "selector": "#library-menu",
+        "visible":  false,
+        "message":  "Surrounded by moldy and old books a spark of madness appears..."
+    },
+
     "areaHome": {
         "type":     "area",
         "label":    "Home",
         "selector": "#home-menu",
         "visible":  false,
-        "message":  "Surrounded by moldy and old books a spark of madness appears..."
+        "message":  "Home message"
     },
 
     "areaTown": {
@@ -36,6 +44,30 @@ var gameElements = {
         "message":  "Organized members can be powerful..."
     },
     // RESOURCES
+    "resourceSanity": {
+        "type":     "resource",
+        "label":    "Sanity",
+        "selector": "#sanity-row",
+        "visible":  true,
+        "message":  ""
+    },
+
+    "resourceIntelligence": {
+        "type":     "resource",
+        "label":    "Intelligence",
+        "selector": "#intelligence-row",
+        "visible":  true,
+        "message":  ""
+    },
+
+    "resourceBooks": {
+        "type":     "resource",
+        "label":    "Books",
+        "selector": "#books-row",
+        "visible":  true,
+        "message":  ""
+    },
+
     "resourceFait": {
         "type":     "resource",
         "label":    "Fait",

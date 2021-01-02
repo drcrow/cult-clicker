@@ -11,6 +11,30 @@ var gameResources = {
         "value": ''     //God's name
     },
 
+    "sanity": {
+        "points": 999,
+        "increment": 0.05
+    },
+
+    "intelligence": {
+        "points": 10,
+        "increment": 0,
+        "cost": [{
+            "resource": "sanity",
+            "amount": 10,
+            "modifier": 1.1
+        },{
+            "resource": "books",
+            "amount": 1,
+            "modifier": 1.1
+        }]
+    },
+
+    "books": {
+        "points": 999,
+        "increment": 0
+    },
+
     "fait": {
         "points": 0,
         "increment": 0
