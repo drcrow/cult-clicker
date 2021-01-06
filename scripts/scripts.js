@@ -1,46 +1,42 @@
+var GAME_TITLE = 'CULT CLICKER v0.3';
+var GAME_SPEED = 1000;
+
+
 /**
  * Load saved game resources and start interval
  */
 $(document).ready(function() {
+    $('#game-title').text(GAME_TITLE);
     // Load gameResources from localStorage
     var savedGameResources = JSON.parse(localStorage.getItem('gameResources'));
     if(savedGameResources != null){
         gameResources = savedGameResources;
-        console.log('Restored gameResources');
     }
 
     // Load gameElements from localStorage
     var savedGameElements = JSON.parse(localStorage.getItem('gameElements'));
     if(savedGameElements != null){
         gameElements = savedGameElements;
-        console.log('Restored gameElements');
     }
 
     // Load gameEvents from localStorage
     var savedGameEvents = JSON.parse(localStorage.getItem('gameEvents'));
     if(savedGameEvents != null){
         gameEvents = savedGameEvents;
-        console.log('Restored gameEvents');
     }
 
-    // Generate list of buttons for god selection
-    godsButtons();
     // Generate rows in Resources table
-    resourcesRows();
+    createResourcesUI();
+
+    // Generate menus and blocks for Areas
+    createAreasUI();
 
     // Show visible gameElements
     for (var elementIndex in gameElements) {
         var element = gameElements[elementIndex];
-        //console.log(elementIndex);
         if(element.visible == true){
             showElement(elementIndex, false);
         }
-        //console.log(element);
-    }
-
-    // If god is already selected, display Library
-    if(gameResources.god.points == 1) {
-        showBlock('library');
     }
 
     // Interval (cicle of the game) Each cicle is a day
@@ -60,7 +56,7 @@ function showElement(elementIndex, showMessage) {
                 addLog('New area available: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
                 break;
             case 'resource':
-                addLog('New resource: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
+                //addLog('New resource: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
                 break;
             case 'action':
                 addLog('Now you can: ' + gameElements[elementIndex].label + '. ' + gameElements[elementIndex].message, 'blue');
@@ -77,6 +73,10 @@ function updateGame() {
     updatePoints();
     updateLabels();
     runEvents();
+
+    updateResourcesUI();
+    updateAreasUI();
+
     localStorage.setItem('gameResources', JSON.stringify(gameResources));
     localStorage.setItem('gameElements', JSON.stringify(gameElements));
     localStorage.setItem('gameEvents', JSON.stringify(gameEvents));
@@ -105,8 +105,8 @@ function updateLabels() {
    Object.keys(gameResources).forEach(resource => {
 
        // table of values
-       $('#label-'+resource+'-pts').text(gameResources[resource].points.toFixed(2));
-       $('#label-'+resource+'-inc').text(gameResources[resource].increment.toFixed(2));
+       //$('#label-'+resource+'-pts').text(gameResources[resource].points.toFixed(2));
+       //$('#label-'+resource+'-inc').text(gameResources[resource].increment.toFixed(2));
 
        // costs in buttons
        if(gameResources[resource].cost != undefined){
@@ -128,6 +128,7 @@ function updateLabels() {
  * Ejecute all the events if the conditions are ok
  */
 function runEvents() {
+    /*
     Object.keys(gameEvents).forEach(event => {
         if(gameEvents[event].done == 0){ // Only process events not done
             var canBeDone = true;
@@ -157,6 +158,7 @@ function runEvents() {
         }
 
     });
+    */
 }
 
 /**
@@ -260,7 +262,7 @@ function showBlock(block) {
     // Hide menu
     $('.collapse').collapse('hide');
 
-    if(block == 'gods' || block == 'about') {
+    if(block == 'about') {
         $('#section-top .col-12').show();
         $('#section-top .col-6').hide();
     }else{
@@ -268,15 +270,10 @@ function showBlock(block) {
         $('#section-top .col-6').show();
     }
 
-
     // Hide all blocks and show the selected one
     $('.block').hide();
     $('.block-resources').show();
     $('.block-'+block).show();
-
-    // Remove background and add the one of the selected block
-    $('body').removeClass('bg_home bg_cult bg_forest bg_town bg_help');
-    $('body').addClass('bg_'+block);
 }
 
 /**
@@ -322,32 +319,75 @@ var godsList = {
 };
 
 /**
- * Save selected god's name
+ * Generate AREAS menus, blocks and ACTIONS
  */
-function selectGod(godName) {
-    gameResources.god.points = 1;
-    gameResources.god.value = godName;
-    addLog(godsList[godName].phrase, 'blue');
-    //showElement('areaHome', false);
-    showBlock('library');
-}
-
-/**
- * Generte Gods buttons list
- */
-function godsButtons() {
-    for (var godName in godsList) {
-        //console.log(godName);
-        $('#god-selection').append('<button class="btn btn-sm btn-success" type="button" onclick="selectGod(\'' + godName + '\');">' + godName + '<br><small>' + godsList[godName].description + '</small></button>');
+function createAreasUI() {
+    for (var areaName in gameElements) {
+        var area = gameElements[areaName];
+        $('#areas-menus-container').append('<li id="'+areaName+'-menu" style="display:none;"  class="nav-item"><a class="nav-link" href="#" onclick="showBlock(\''+areaName+'\')">&rtrif; '+area.label+'</a></li>');
+        $('#areas-blocks-container').append('<div id="'+areaName+'-block" style="display:none;" class="block bg-light p-2 rounded"><h5>'+area.label+'</h5></div>');
+        for (var actionIndex in area.actions) {
+            var action = area.actions[actionIndex];
+            $('#'+areaName+'-block').append('<button id="'+action.name+'-btn" style="display:none;" class="btn btn-sm btn-action btn-primary" type="button" onclick="doAction(\''+action.name+'\');">'+action.label+'<br><small class="cost">X</small></button>');
+        }
     }
 }
 
 /**
+ * Update values and visibility of AREAS menus, blocks and ACTIONS
+ */
+function updateAreasUI() {
+    for (var areaName in gameElements) {
+        var area = gameElements[areaName];
+
+        if (area.visible == true) {
+            $('#'+areaName+'-menu').show();
+        } else {
+            $('#'+areaName+'-menu').hide();
+        }
+
+        if (area.active == true) {
+            $('#'+areaName+'-block').show();
+            console.log(areaName);
+        } else {
+            $('#'+areaName+'-block').hide();
+        }
+
+        for (var actionIndex in area.actions) {
+            var action = area.actions[actionIndex];
+            if (action.visible == true) {
+                $('#'+action.name+'-btn').show();
+            } else {
+                $('#'+action.name+'-btn').hide();
+            }
+        }
+    }
+}
+
+
+/**
  * Generate Resources table rows
  */
-function resourcesRows() {
+function createResourcesUI() {
     for (var resourceName in gameResources) {
-        console.log(resourceName);
-        $('#resources-table tbody').append('<tr id="'+resourceName+'-row" style="display: none;"><td class="resource-name fitwidth">'+resourceName+'</td><td><span id="label-'+resourceName+'-pts">X</span></td><td class="fitwidth"><span id="label-'+resourceName+'-inc">X</span>/s</td></tr>');
+        var resource = gameResources[resourceName];
+        $('#resources-table tbody').append('<tr class="'+resourceName+'-row" style="display: none;"><td class="resource-name fitwidth">'+resource.label+'</td><td><span class="'+resourceName+'-pts">X</span></td><td class="fitwidth"><span class="'+resourceName+'-inc">X</span>/s</td></tr>');
+    }
+}
+
+/**
+ * Update values and visibility of Resources table rows
+ */
+function updateResourcesUI() {
+    for (var resourceName in gameResources) {
+        var resource = gameResources[resourceName];
+        if(resource.visible == true) {
+            $('.'+resourceName+'-row').show();
+        } else {
+            $('.'+resourceName+'-row').hide();
+        }
+
+        $('.'+resourceName+'-pts').text(resource.points.toFixed(2));
+        $('.'+resourceName+'-inc').text(resource.increment.toFixed(2));
     }
 }

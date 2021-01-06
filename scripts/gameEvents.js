@@ -1,6 +1,6 @@
 var gameEvents = {
 
-    "game-start": {
+    "start-1": {
         "done": 0,
         "conditions":[{
             "resource": "time",
@@ -8,7 +8,31 @@ var gameEvents = {
         }],
         "results": [{
             "type": "log",
-            "message": "Welcome to Cult Clicker. First of all you need to select a God."
+            "message": "A distant relative you never knew has passed away and has inherited all of their belongings to you..."
+        }]
+    },
+
+    "start-2": {
+        "done": 0,
+        "conditions":[{
+            "resource": "time",
+            "amount": 10
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Apparently he was some kind of hermit who never left his old house..."
+        }]
+    },
+
+    "start-3": {
+        "done": 0,
+        "conditions":[{
+            "resource": "time",
+            "amount": 20
+        }],
+        "results": [{
+            "type": "log",
+            "message": "Long ago it was a beautiful mansion. It is now a decaying, dark building surrounded by withered trees..."
         }]
     },
 

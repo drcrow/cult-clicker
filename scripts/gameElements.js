@@ -1,142 +1,36 @@
 /**
- * List of Areas, Resources and Actions
+ * List of Areas and Actions
  */
 
 var gameElements = {
-    // AREAS
-    "areaLibrary": {
-        "type":     "area",
-        "label":    "Library",
-        "selector": "#library-menu",
-        "visible":  false,
-        "message":  "Surrounded by moldy and old books a spark of madness appears..."
+    "frontYard": {
+        "label": "Front Yard",
+        "visible": true, // Menu is displayed (several menus can be displayed at the same time)
+        "active": true, // Block is displayed (only one block must be displayed)
+        "actions": [{
+            "name": "enter",
+            "label": "ENTER",
+            "visible": true,
+            "results": [
+                {"type": "enable-area", "value": true, "area": "library"}
+            ]
+        }]
     },
 
-    "areaHome": {
-        "type":     "area",
-        "label":    "Home",
-        "selector": "#home-menu",
-        "visible":  false,
-        "message":  "Home message"
-    },
-
-    "areaTown": {
-        "type":     "area",
-        "label":    "Town",
-        "selector": "#town-menu",
-        "visible":  false,
-        "message":  "It is time to allow the truth to spread..."
-    },
-
-    "areaForest": {
-        "type":     "area",
-        "label":    "Forest",
-        "selector": "#forest-menu",
-        "visible":  false,
-        "message":  "Ancient trees hide nameless horrors among their roots..."
-    },
-
-    "areaCult": {
-        "type":     "area",
-        "label":    "Cult",
-        "selector": "#cult-menu",
-        "visible":  false,
-        "message":  "Organized members can be powerful..."
-    },
-    // RESOURCES
-    "resourceSanity": {
-        "type":     "resource",
-        "label":    "Sanity",
-        "selector": "#sanity-row",
-        "visible":  true,
-        "message":  ""
-    },
-
-    "resourceIntelligence": {
-        "type":     "resource",
-        "label":    "Intelligence",
-        "selector": "#intelligence-row",
-        "visible":  true,
-        "message":  ""
-    },
-
-    "resourceBooks": {
-        "type":     "resource",
-        "label":    "Books",
-        "selector": "#books-row",
-        "visible":  true,
-        "message":  ""
-    },
-
-    "resourceFait": {
-        "type":     "resource",
-        "label":    "Fait",
-        "selector": "#fait-row",
-        "visible":  false,
-        "message":  ""
-    },
-
-    "resourceKnowledge": {
-        "type":     "resource",
-        "label":    "Knowledge",
-        "selector": "#knowledge-row",
-        "visible":  false,
-        "message":  ""
-    },
-
-    "resourceGrimoires": {
-        "type":     "resource",
-        "label":    "Grimoires",
-        "selector": "#grimoires-row",
-        "visible":  false,
-        "message":  "Your grimoires will help you grow your magic power."
-    },
-
-    "resourceMagic": {
-        "type":     "resource",
-        "label":    "Magic",
-        "selector": "#magic-row",
-        "visible":  false,
-        "message":  "Magic will help you fulfill your sacred duty."
-    },
-
-    "resourceMembers": {
-        "type":     "resource",
-        "label":    "Members",
-        "selector": "#members-row",
-        "visible":  false,
-        "message":  "Each new member will pray with you and make your fait grow."
-    },
-    // ACTIONS
-    "actionPray": {
-        "type":     "action",
-        "label":    "PRAY",
-        "selector": "#pray-btn",
-        "visible":  true,
-        "message":  ""
-    },
-
-    "actionStudy": {
-        "type":     "action",
-        "label":    "STUDY",
-        "selector": "#study-btn",
-        "visible":  true,
-        "message":  ""
-    },
-
-    "actionWrite": {
-        "type":     "action",
-        "label":    "WRITE",
-        "selector": "#write-btn",
-        "visible":  false,
-        "message":  "Leave a record of what grows in your mind and soul."
-    },
-
-    "actionRecruit": {
-        "type":     "action",
-        "label":    "RECRUIT",
-        "selector": "#recruit-btn",
-        "visible":  false,
-        "message":  "Spread the word."
+    "library": {
+        "label": "Library",
+        "visible": false,
+        "active": false,
+        "actions": [{
+            "label": "Study",
+            "visible": true,
+            "cost": [
+                {"resource": "sanity", "amount": 10, "modifier": 1.1},
+                {"resource": "books", "amount": 1, "modifier": 1.1}
+            ],
+            "results": [
+                {"type": "buy-resource", "value": 1, "resource": "intelligence"}
+            ]
+        }]
     },
 };
